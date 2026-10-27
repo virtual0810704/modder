@@ -47,7 +47,7 @@ body:not(.forge-local-admin) .compare-admin {display:none!important}
 document.addEventListener('DOMContentLoaded',()=>{
  const admin=location.protocol==='file:';
  if(admin)document.body.classList.add('forge-local-admin');
- const indicator=document.createElement('div');indicator.id='forgeModeIndicator';indicator.textContent=(admin?'🔧 本機管理模式':'👁 公開訪客模式')+' · '+(window.FORGE_PUBLISHED_EDITOR_STATE?.releaseVersion||'V12.3');document.body.append(indicator);
+ const indicator=document.createElement('div');indicator.id='forgeModeIndicator';indicator.textContent=(admin?'🔧 本機管理模式':'👁 公開訪客模式')+' · '+(window.FORGE_PUBLISHED_EDITOR_STATE?.releaseVersion||'V12.4');document.body.append(indicator);
  if(!admin){
   const toggle=document.getElementById('v3Toggle');if(toggle)toggle.onclick=e=>{e.preventDefault();};
   const studio=document.getElementById('v3Studio');if(studio)studio.hidden=true;
@@ -59,8 +59,12 @@ document.addEventListener('DOMContentLoaded',()=>{
 });
 </script>
 <style id="forge-policy-style">#trade-policies .forge-policy-list{display:grid;grid-template-columns:minmax(0,1fr);gap:10px}#trade-policies .forge-policy-list details{width:100%;box-sizing:border-box}#trade-policies .forge-policy-list details p{max-width:none;line-height:1.85;padding:0 0 18px;margin:0}#trade-policies .forge-policy-small{margin-top:22px;line-height:1.85;font-size:.9rem;color:var(--muted)} </style>
-</head><body>
-<title>鍛模工坊 V12.3｜3D 展示與作品管理</title>
+<style id="forge-faq-two-column">
+#faq .faq, #trade-policies .forge-policy-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;max-width:none;align-items:start}
+#faq .faq details, #trade-policies .forge-policy-list details{min-width:0;width:100%;box-sizing:border-box}
+@media(max-width:700px){#faq .faq,#trade-policies .forge-policy-list{grid-template-columns:minmax(0,1fr)}}
+</style></head><body>
+<title>鍛模工坊 V12.4｜3D 展示與作品管理</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -965,13 +969,9 @@ body.forge-editing .compare-admin{display:grid;gap:10px}
   <section class="block alt" id="trade-policies" aria-label="交易說明與客戶權益">
     <div class="wrap">
       <div class="sec-head"><span class="eyebrow">Service &amp; Customer Care</span><h2>交易說明與客戶權益</h2>
-      <p>以下為一般服務原則，實際承作範圍、價格、交期、付款與使用授權，以雙方確認的書面報價及訂單內容為準；依法保障的權利不受以下說明限制。</p></div>
+      <p>以下為付款、取消與退款、隱私及授權相關規範；報價、回覆時間、免費修正可見上方常見問題，交付驗收依專案書面約定。實際承作範圍、價格、交期、付款與使用授權，以雙方確認的書面報價及訂單內容為準；依法保障的權利不受以下說明限制。</p></div>
       <div class="faq forge-policy-list">
-        <details><summary>服務與正式報價</summary><p>提供 3D 模型、遊戲素材調整、AI 工具或系統架設等服務。網站估價工具僅供預算參考，並非最終成交價格；正式報價將依需求、素材、交付項目、時程及可能的第三方費用確認。</p></details>
-        <details><summary>聯絡與回覆時間</summary><p>請提供需求內容、參考資料與聯絡方式。收到完整需求後，預計 3～5 個工作天內初次回覆，不含週末及例假日；複雜專案的評估或製作交期另行約定。</p></details>
         <details><summary>付款與訂單確認</summary><p>確認正式報價、製作範圍、訂金及付款方式後才開始排程。是否分階段收款、尾款支付時間與第三方服務費用，均以訂單或雙方書面確認內容為準。</p></details>
-        <details><summary>交付與驗收</summary><p>依專案提供指定格式的檔案、安裝設定或遠端操作教學。交付方式與預定日期於接案時確認；客戶應在收到交付成果後依約提出驗收意見，並配合提供必要的測試環境。</p></details>
-        <details><summary>免費修正範圍</summary><p>交付後 7 天內，原約定需求範圍內的瑕疵可免費修正，累計最多 10 次。一次指一次集中提出的修正清單。新增需求、修改規格、客戶自行變更環境造成的問題，將先確認是否另行報價；依法應負責任不因次數上限而免除。</p></details>
         <details><summary>取消訂單與退款</summary><p>尚未開始製作時，可聯繫申請取消並依交易狀態及依法應適用的規定處理；開始製作後，依已完成工作、既有成本、約定內容與適用法律協商結算。符合法定解除權者，仍依法辦理。客製化服務或數位內容是否屬解除權例外，須符合事先告知等法定條件，不一概排除退款。</p></details>
         <details><summary>隱私及資料使用</summary><p>為需求評估、報價、履約、售後服務與必要聯繫，可能使用您提供的姓名或暱稱、聯絡資訊、需求文件與交易資料。僅在履約必要、依法要求或獲同意時提供予第三方；如透過 LINE、電子郵件或金流服務聯繫與付款，相關平台亦依其政策處理資料。可透過下方聯絡方式洽詢資料相關事項。</p></details>
         <details><summary>素材合法性與使用授權</summary><p>客戶應確保交付素材及委託用途具合法使用授權；不承接明知侵權或違法內容。製作成果的原始檔、授權使用範圍、再散布及商用權利，依個別訂單書面約定；未明示者請在付款前確認。</p></details>
@@ -1843,13 +1843,13 @@ if (location.protocol !== "file:") { console.info("公開站點：僅供瀏覽�
 
 (function(){"use strict";
 const STORE='forge-studio-v4-editor-state';
-const FORGE_BUILD_VERSION='V12.3';
+const FORGE_BUILD_VERSION='V12.4';
 const FORGE_BUILD_DATE='2026-10-27';
 const q=(s,r=document)=>r.querySelector(s);
 const all=(s,r=document)=>Array.from(r.querySelectorAll(s));
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const DEFAULT_LOGO_SRC=document.querySelector('#brandMark img')?.getAttribute('src') || '';
-let state={changes:{},deleted:[],added:[],lineId:null,lineUrl:null,email:null,phone:null,logoSrc:null,releaseVersion:'V12.3',releaseNotes:'將交易說明與客戶權益改成單欄、預設收合的 FAQ 手風琴列表；保留原交易條款'},selected=null,admin=false;
+let state={changes:{},deleted:[],added:[],lineId:null,lineUrl:null,email:null,phone:null,logoSrc:null,releaseVersion:'V12.4',releaseNotes:'常見問題與交易條款改為雙欄可收合列表，移除重複的交付、修改、報價與回覆說明'},selected=null,admin=false;
 let seq=0;
 // ID tags are assigned deterministically to original content. Extra sections get distinct stable IDs.
 const candidates='h1,h2,h3,h4,p,li,small,span,strong,em,b,label,summary,blockquote,figcaption,a,button,img,video,source,iframe,.deliver-card,.craft-card,.work,.svc,.faq,.promise-item,section,header,footer';
@@ -1907,12 +1907,12 @@ function updateVersionUI(){
 }
 const btn=document.createElement('button');btn.id='forgeAdminToggle';btn.textContent='✎ 編輯網站';btn.type='button';document.body.append(btn);
 const panel=document.createElement('aside');panel.id='forgeAdminPanel';panel.hidden=true;
-panel.innerHTML=`<div class="forgeHead"><h3>鍛模工坊 · 全站編輯 <span id="forgeVersionCurrent">V12.3</span></h3><button id="forgeClose" type="button">✕</button></div>
+panel.innerHTML=`<div class="forgeHead"><h3>鍛模工坊 · 全站編輯 <span id="forgeVersionCurrent">V12.4</span></h3><button id="forgeClose" type="button">✕</button></div>
 <p>先點選網站上想修改的文字、圖片、影片或區塊。管理介面只在編輯模式顯示；訪客模式不會看到區塊操作鈕。</p>
 <div id="forgeAdminToast" aria-live="polite"></div>
 <div style="padding:12px;border:1px solid #56647a;border-radius:12px;margin:12px 0;background:#18283e">
 <h3 style="margin:0 0 9px">版本管理／發布編號</h3>
-<label>目前網站版本（例如 V12、V12.3）</label><input id="forgeVersionInput" value="V12.3" maxlength="32" placeholder="V12.3">
+<label>目前網站版本（例如 V12、V12.4）</label><input id="forgeVersionInput" value="V12.4" maxlength="32" placeholder="V12.4">
 <label>本次更新紀錄</label><textarea id="forgeVersionNotes" placeholder="記錄這次改了哪些功能"></textarea>
 <button id="forgeSaveVersion" class="primary" type="button" style="width:100%;margin-top:9px">✓ 儲存版本與更新紀錄</button>
 <p style="font-size:12px;color:#b8c9df">匯出 ZIP 將使用這個編號命名；GitHub 訪客頁面也會顯示版本，方便確認是否更新成功。</p>
@@ -1952,7 +1952,7 @@ panel.innerHTML=`<div class="forgeHead"><h3>鍛模工坊 · 全站編輯 <span i
 <p>重要：這是靜態網站編輯器，修改只儲存在目前瀏覽器。發布前請匯出 HTML 或完整 ZIP，再上傳至 GitHub。外部圖片和 YouTube 連結不會下載成檔案；在公開網站仍須可連線。編輯模式沒有登入驗證，不等同真正的網站後台。</p>`;
 document.body.append(panel);
 updateVersionUI();
-q('#forgeSaveVersion').onclick=()=>{const value=q('#forgeVersionInput').value.trim();if(!/^V?[0-9]+(?:\.[0-9]+){0,3}(?:[-_][a-zA-Z0-9]+)?$/.test(value))return toast('版本格式請使用 V12 或 V12.3');state.releaseVersion=value.startsWith('V')?value:'V'+value;state.releaseNotes=q('#forgeVersionNotes').value.trim();putSaved();toast('✓ 版本已更新為 '+state.releaseVersion+'，匯出時會套用此編號')};
+q('#forgeSaveVersion').onclick=()=>{const value=q('#forgeVersionInput').value.trim();if(!/^V?[0-9]+(?:\.[0-9]+){0,3}(?:[-_][a-zA-Z0-9]+)?$/.test(value))return toast('版本格式請使用 V12 或 V12.4');state.releaseVersion=value.startsWith('V')?value:'V'+value;state.releaseNotes=q('#forgeVersionNotes').value.trim();putSaved();toast('✓ 版本已更新為 '+state.releaseVersion+'，匯出時會套用此編號')};
 function editing(x){admin=x;panel.hidden=!x;btn.textContent=x?'✓ 結束編輯':'✎ 編輯網站';document.body.classList.toggle('forge-editing',x);if(!x && selected){selected.classList.remove('forge-selected');selected=null}}
 applyLogo();
 q('#forgeLogoFile').onchange=async e=>{
