@@ -47,7 +47,7 @@ body:not(.forge-local-admin) .compare-admin {display:none!important}
 document.addEventListener('DOMContentLoaded',()=>{
  const admin=location.protocol==='file:';
  if(admin)document.body.classList.add('forge-local-admin');
- const indicator=document.createElement('div');indicator.id='forgeModeIndicator';indicator.textContent=admin?'🔧 本機管理模式':'👁 公開訪客模式';document.body.append(indicator);
+ const indicator=document.createElement('div');indicator.id='forgeModeIndicator';indicator.textContent=(admin?'🔧 本機管理模式':'👁 公開訪客模式')+' · '+(window.FORGE_PUBLISHED_EDITOR_STATE?.releaseVersion||'V12');document.body.append(indicator);
  if(!admin){
   const toggle=document.getElementById('v3Toggle');if(toggle)toggle.onclick=e=>{e.preventDefault();};
   const studio=document.getElementById('v3Studio');if(studio)studio.hidden=true;
@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded',()=>{
  }
 });
 </script></head><body>
-<title>鍛模工坊 V3｜3D 展示與作品管理</title>
+<title>鍛模工坊 V12｜3D 展示與作品管理</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1802,11 +1802,13 @@ if (location.protocol !== "file:") { console.info("公開站點：僅供瀏覽�
 
 (function(){"use strict";
 const STORE='forge-studio-v4-editor-state';
+const FORGE_BUILD_VERSION='V12';
+const FORGE_BUILD_DATE='2026-10-27';
 const q=(s,r=document)=>r.querySelector(s);
 const all=(s,r=document)=>Array.from(r.querySelectorAll(s));
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const DEFAULT_LOGO_SRC=document.querySelector('#brandMark img')?.getAttribute('src') || '';
-let state={changes:{},deleted:[],added:[],lineId:null,lineUrl:null,logoSrc:null},selected=null,admin=false;
+let state={changes:{},deleted:[],added:[],lineId:null,lineUrl:null,logoSrc:null,releaseVersion:'V12',releaseNotes:'新增版本管理／統一發布版本標示'},selected=null,admin=false;
 let seq=0;
 // ID tags are assigned deterministically to original content. Extra sections get distinct stable IDs.
 const candidates='h1,h2,h3,h4,p,li,small,span,strong,em,b,label,summary,blockquote,figcaption,a,button,img,video,source,iframe,.deliver-card,.craft-card,.work,.svc,.faq,.promise-item,section,header,footer';
@@ -1815,10 +1817,12 @@ all(candidates).filter(el=>!el.closest('#forgeAdminPanel') && !el.closest('#forg
 });
 const originalMax=seq;
 try{const saved=localStorage.getItem(STORE);if(saved)state=Object.assign(state,JSON.parse(saved));}catch(e){console.warn('Editor data unavailable',e)}
+if(!state.releaseVersion)state.releaseVersion=FORGE_BUILD_VERSION;
+if(typeof state.releaseNotes!=='string')state.releaseNotes='';
 const embedded=window.FORGE_PUBLISHED_EDITOR_STATE;
 if(embedded && !localStorage.getItem(STORE))state=Object.assign({changes:{},deleted:[],added:[]},embedded);
 function elFor(id){return all('[data-forge-node]').find(el=>el.dataset.forgeNode===id)}
-function putSaved(){try{localStorage.setItem(STORE,JSON.stringify(state));toast('✓ 變更已儲存在這台電腦')}catch(e){toast('本機空間不足，請先匯出 HTML 或備份設定')}}
+function putSaved(){try{localStorage.setItem(STORE,JSON.stringify(state));updateVersionUI();toast('✓ 變更已儲存在這台電腦')}catch(e){toast('本機空間不足，請先匯出 HTML 或備份設定')}}
 function toast(s){const x=q('#forgeAdminToast');if(x)x.textContent=s}
 function rebindNew(root){all(candidates,root).forEach(el=>{if(!el.dataset.forgeNode)el.dataset.forgeNode='new-'+Date.now().toString(36)+'-'+(++seq)})}
 function applyLogo(){
@@ -1846,11 +1850,26 @@ function apply(){
  applyLogo();
 }
 apply();
+function updateVersionUI(){
+ const version=String(state.releaseVersion||FORGE_BUILD_VERSION);
+ const shown=q('#forgeVersionCurrent');if(shown)shown.textContent=version;
+ const field=q('#forgeVersionInput');if(field && document.activeElement!==field)field.value=version;
+ const notes=q('#forgeVersionNotes');if(notes && document.activeElement!==notes)notes.value=state.releaseNotes||'';
+ const badge=q('#forgeModeIndicator');if(badge)badge.textContent='🔧 本機管理模式 · '+version;
+ document.title=document.title.replace(/\s*[|｜]\s*V\d+(?:\.\d+)*$/,'')+' | '+version;
+}
 const btn=document.createElement('button');btn.id='forgeAdminToggle';btn.textContent='✎ 編輯網站';btn.type='button';document.body.append(btn);
 const panel=document.createElement('aside');panel.id='forgeAdminPanel';panel.hidden=true;
-panel.innerHTML=`<div class="forgeHead"><h3>鍛模工坊 · 全站編輯</h3><button id="forgeClose" type="button">✕</button></div>
+panel.innerHTML=`<div class="forgeHead"><h3>鍛模工坊 · 全站編輯 <span id="forgeVersionCurrent">V12</span></h3><button id="forgeClose" type="button">✕</button></div>
 <p>先點選網站上想修改的文字、圖片、影片或區塊。管理介面只在編輯模式顯示；訪客模式不會看到區塊操作鈕。</p>
 <div id="forgeAdminToast" aria-live="polite"></div>
+<div style="padding:12px;border:1px solid #56647a;border-radius:12px;margin:12px 0;background:#18283e">
+<h3 style="margin:0 0 9px">版本管理／發布編號</h3>
+<label>目前網站版本（例如 V12、V12.1）</label><input id="forgeVersionInput" value="V12" maxlength="32" placeholder="V12.1">
+<label>本次更新紀錄</label><textarea id="forgeVersionNotes" placeholder="記錄這次改了哪些功能"></textarea>
+<button id="forgeSaveVersion" class="primary" type="button" style="width:100%;margin-top:9px">✓ 儲存版本與更新紀錄</button>
+<p style="font-size:12px;color:#b8c9df">匯出 ZIP 將使用這個編號命名；GitHub 訪客頁面也會顯示版本，方便確認是否更新成功。</p>
+</div>
 <h3>網站 LOGO 設定</h3>
 <p>上傳或貼上圖片網址，可自訂左上角品牌圖片。支援 PNG、JPG、WebP 等圖片，建議透明背景的正方形 LOGO。</p>
 <div id="forgeLogoPreview" style="min-height:62px;display:flex;align-items:center;gap:8px"></div>
@@ -1879,6 +1898,8 @@ panel.innerHTML=`<div class="forgeHead"><h3>鍛模工坊 · 全站編輯</h3><bu
 <p id="forgePackInfo" aria-live="polite"></p>
 <p>重要：這是靜態網站編輯器，修改只儲存在目前瀏覽器。發布前請匯出 HTML 或完整 ZIP，再上傳至 GitHub。外部圖片和 YouTube 連結不會下載成檔案；在公開網站仍須可連線。編輯模式沒有登入驗證，不等同真正的網站後台。</p>`;
 document.body.append(panel);
+updateVersionUI();
+q('#forgeSaveVersion').onclick=()=>{const value=q('#forgeVersionInput').value.trim();if(!/^V?[0-9]+(?:\.[0-9]+){0,3}(?:[-_][a-zA-Z0-9]+)?$/.test(value))return toast('版本格式請使用 V12 或 V12.1');state.releaseVersion=value.startsWith('V')?value:'V'+value;state.releaseNotes=q('#forgeVersionNotes').value.trim();putSaved();toast('✓ 版本已更新為 '+state.releaseVersion+'，匯出時會套用此編號')};
 function editing(x){admin=x;panel.hidden=!x;btn.textContent=x?'✓ 結束編輯':'✎ 編輯網站';document.body.classList.toggle('forge-editing',x);if(!x && selected){selected.classList.remove('forge-selected');selected=null}}
 applyLogo();
 q('#forgeLogoFile').onchange=async e=>{
@@ -2009,9 +2030,9 @@ q('#forgePackage').onclick=async()=>{
    if(f)entries.set(path,new Uint8Array(await f.arrayBuffer()));else missing.push(path);
   }
   entries.set('index.html',new TextEncoder().encode(html));
-  entries.set('使用說明.txt',new TextEncoder().encode('鍛模工坊 V5 完整網站打包\\n1. 解壓縮 ZIP。\\n2. 將 index.html 與 images/ videos/ 資料夾（如有）一起上傳 GitHub 儲存庫根目錄。\\n3. Settings → Pages → Deploy from a branch → main / (root)。\\n4. 外部網址、YouTube 仍需網路。\\n5. 如果「缺少素材清單.txt」有內容，請回到編輯頁用「補充本機圖片／影片」選取缺少的檔案後重新打包。\\n'));
+  entries.set('使用說明.txt',new TextEncoder().encode('鍛模工坊 '+(state.releaseVersion||FORGE_BUILD_VERSION)+' 完整網站打包\\n1. 解壓縮 ZIP。\\n2. 將 index.html 與 images/ videos/ 資料夾（如有）一起上傳 GitHub 儲存庫根目錄。\\n3. Settings → Pages → Deploy from a branch → main / (root)。\\n4. 外部網址、YouTube 仍需網路。\\n5. 如果「缺少素材清單.txt」有內容，請回到編輯頁用「補充本機圖片／影片」選取缺少的檔案後重新打包。\\n'));
   if(missing.length)entries.set('缺少素材清單.txt',new TextEncoder().encode(missing.join('\\n')+'\\n'));
-  const blob=forgeZip(entries);const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='鍛模工坊_V6_GitHub完整網站.zip';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),60000);
+  const blob=forgeZip(entries);const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='鍛模工坊_'+(state.releaseVersion||FORGE_BUILD_VERSION)+'_GitHub完整網站.zip';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),60000);
   const msg=`✓ 已打包 ${entries.size} 個檔案、整理 ${result.converted} 個內嵌圖片／影片`+(missing.length?`；⚠ 缺少 ${missing.length} 個原始素材，請看 ZIP 內的「缺少素材清單.txt」並補充檔案後重新打包`:'；無缺漏素材');
   toast(msg);q('#forgePackInfo').textContent=msg;
  }catch(e){toast('打包失敗：'+e.message)}finally{button.disabled=false}
