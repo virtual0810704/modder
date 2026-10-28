@@ -47,7 +47,7 @@ body:not(.forge-local-admin) .compare-admin {display:none!important}
 document.addEventListener('DOMContentLoaded',()=>{
  const admin=location.protocol==='file:';
  if(admin)document.body.classList.add('forge-local-admin');
- const indicator=document.createElement('div');indicator.id='forgeModeIndicator';indicator.textContent=(admin?'🔧 本機管理模式':'👁 公開訪客模式')+' · '+(window.FORGE_PUBLISHED_EDITOR_STATE?.releaseVersion||'V12.7');document.body.append(indicator);
+ const indicator=document.createElement('div');indicator.id='forgeModeIndicator';indicator.textContent=(admin?'🔧 本機管理模式':'👁 公開訪客模式')+' · '+(window.FORGE_PUBLISHED_EDITOR_STATE?.releaseVersion||'V12.8');document.body.append(indicator);
  if(!admin){
   const toggle=document.getElementById('v3Toggle');if(toggle)toggle.onclick=e=>{e.preventDefault();};
   const studio=document.getElementById('v3Studio');if(studio)studio.hidden=true;
@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded',()=>{
 #faq .faq details, #trade-policies .forge-policy-list details{min-width:0;width:100%;box-sizing:border-box}
 @media(max-width:700px){#faq .faq,#trade-policies .forge-policy-list{grid-template-columns:minmax(0,1fr)}}
 </style><style id="forge-copy-polish-v125">
-/* V12.7: natural CJK sentence breaks on desktop and mobile without changing functionality. */
+/* V12.8: natural CJK sentence breaks on desktop and mobile without changing functionality. */
 html{line-break:strict}
 body{overflow-wrap:break-word}
 :where(p,li,summary,figcaption,blockquote,.desc,.note,.sub,.intro,.q-info,.steps span){
@@ -100,8 +100,26 @@ body{overflow-wrap:break-word}
 /* Preserve line breaks and blank lines entered in the plain-text editor. */
 .forge-multiline{white-space:pre-wrap!important}
 </style>
+<style id="forge-layout-controls-v128">
+body[data-forge-page-text-align="left"] :is(.hero-copy,.sec-head,.showcase-intro,.deliver-card,.craft-tile,.v3-project-card,.ba-side,.work,.q-hero,.forge-new-section>.wrap){text-align:left}
+body[data-forge-page-text-align="left"] :is(.hero-copy,.sec-head,.showcase-intro,.deliver-card,.craft-tile,.v3-project-card,.ba-side,.work,.q-hero,.forge-new-section>.wrap)>p{margin-left:0;margin-right:auto}
+body[data-forge-page-text-align="left"] .hero-copy>:is(.hero-cta,.hero-mini,.hero-tags){justify-content:flex-start}
+body[data-forge-page-text-align="center"] :is(.hero-copy,.sec-head,.showcase-intro,.deliver-card,.craft-tile,.v3-project-card,.ba-side,.work,.q-hero,.forge-new-section>.wrap){text-align:center}
+body[data-forge-page-text-align="center"] :is(.hero-copy,.sec-head,.showcase-intro,.deliver-card,.craft-tile,.v3-project-card,.ba-side,.work,.q-hero,.forge-new-section>.wrap)>p{margin-left:auto;margin-right:auto}
+body[data-forge-page-text-align="center"] .hero-copy>:is(.hero-cta,.hero-mini,.hero-tags){justify-content:center}
+body[data-forge-page-text-align="right"] :is(.hero-copy,.sec-head,.showcase-intro,.deliver-card,.craft-tile,.v3-project-card,.ba-side,.work,.q-hero,.forge-new-section>.wrap){text-align:right}
+body[data-forge-page-text-align="right"] :is(.hero-copy,.sec-head,.showcase-intro,.deliver-card,.craft-tile,.v3-project-card,.ba-side,.work,.q-hero,.forge-new-section>.wrap)>p{margin-left:auto;margin-right:0}
+body[data-forge-page-text-align="right"] .hero-copy>:is(.hero-cta,.hero-mini,.hero-tags){justify-content:flex-end}
+body [data-forge-text-align="left"][data-forge-node]>p{margin-left:0;margin-right:auto}
+body [data-forge-text-align="left"][data-forge-node]>:is(.hero-cta,.hero-mini,.hero-tags){justify-content:flex-start}
+body [data-forge-text-align="center"][data-forge-node]>p{margin-left:auto;margin-right:auto}
+body [data-forge-text-align="center"][data-forge-node]>:is(.hero-cta,.hero-mini,.hero-tags){justify-content:center}
+body [data-forge-text-align="right"][data-forge-node]>p{margin-left:auto;margin-right:0}
+body [data-forge-text-align="right"][data-forge-node]>:is(.hero-cta,.hero-mini,.hero-tags){justify-content:flex-end}
+#forgeLayoutGroup{border:1px solid #59647e;border-radius:12px;padding:12px;margin:14px 0;background:#1c2433}#forgeAdminPanel #forgeLayoutWidthEnabled{width:auto}#forgeLayoutGroup output{color:#ffe5b1}#forgeLayoutWidthRow{display:flex;align-items:center;gap:10px}#forgeLayoutWidthRow input{flex:1;min-width:0}#forgeLayoutWidthRow output{min-width:38px}
+</style>
 </head><body>
-<title>鍛模工坊 V12.7｜3D 展示與作品管理</title>
+<title>鍛模工坊 V12.8｜3D 展示與作品管理</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -642,7 +660,8 @@ body.forge-editing .compare-admin{display:grid;gap:10px}
 .pill[aria-pressed="true"] { background: var(--mod); color: #FFFFFF; border-color: var(--mod); }
 
 /* ---------- AI 對話示範 ---------- */
-.ai-grid { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 44px; align-items: center; }
+.ai-grid { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 44px; align-items: center; }
+.ai-grid>div:first-child{min-width:0;width:100%}
 @media (max-width: 860px) { .ai-grid { grid-template-columns: 1fr; justify-items: center; } .ai-list { width: 100%; } }
 .ai-list { display: grid; gap: 12px; }
 .ai-sc {
@@ -658,14 +677,14 @@ body.forge-editing .compare-admin{display:grid;gap:10px}
 .ai-sc .d { color: var(--muted); font-size: .9rem; }
 .ai-sc .chip { justify-self: start; --cat-soft: var(--surface-2); }
 .ai-cta { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 4px; }
-.phone { width: min(340px, 100%); border-radius: 36px; padding: 10px; background: #0B1022; box-shadow: 0 30px 60px rgba(11,16,34,.35), inset 0 0 0 2px #2A3249; }
-.phone-scr { border-radius: 28px; overflow: hidden; background: #C9D8EA; display: grid; grid-template-rows: auto 1fr; height: 540px; }
+.phone { width: 100%; max-width:340px; min-width:0; border-radius: 36px; padding: 10px; background: #0B1022; box-shadow: 0 30px 60px rgba(11,16,34,.35), inset 0 0 0 2px #2A3249; }
+.phone-scr { border-radius: 28px; overflow: hidden; background: #C9D8EA; display: grid; grid-template-rows: auto minmax(0,1fr); height: 540px; }
 .phone-top { background: #1E2A44; color: #FFFFFF; padding: 16px 16px 12px; display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: .95rem; }
 .phone-top .av { width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(135deg, #3FD8CC, #2F74E0); display: grid; place-items: center; font-size: .72rem; flex: none; }
 .phone-top small { display: block; font-weight: 400; font-size: .7rem; color: #9FE8B5; }
-.chat { overflow-y: auto; padding: 14px 12px; display: flex; flex-direction: column; gap: 10px; }
+.chat { min-width:0;min-height:0;overflow-x:hidden;scrollbar-gutter:stable;overflow-y: auto; padding: 14px 12px; display: flex; flex-direction: column; gap: 10px; }
 .chat .day { align-self: center; font-size: .7rem; color: #4B5873; background: rgba(255,255,255,.6); padding: 2px 10px; border-radius: 999px; }
-.msg { max-width: 82%; padding: 9px 12px; border-radius: 16px; font-size: .88rem; line-height: 1.55; color: #141A2E; white-space: pre-line; animation: pop .25s ease-out; }
+.msg { flex-shrink:0;overflow-wrap:anywhere;max-width: 82%; padding: 9px 12px; border-radius: 16px; font-size: .88rem; line-height: 1.55; color: #141A2E; white-space: pre-line; animation: pop .25s ease-out; }
 .msg.bot { align-self: flex-start; background: #FFFFFF; border-top-left-radius: 4px; }
 .msg.user { align-self: flex-end; background: #8EE07A; border-top-right-radius: 4px; }
 .msg .src { display: block; margin-top: 6px; padding-top: 6px; border-top: 1px dashed #C9D2E0; font-size: .74rem; color: #59637F; white-space: normal; }
@@ -1880,13 +1899,13 @@ if (location.protocol !== "file:") { console.info("公開站點：僅供瀏覽�
 
 (function(){"use strict";
 const STORE='forge-studio-v4-editor-state';
-const FORGE_BUILD_VERSION='V12.7';
+const FORGE_BUILD_VERSION='V12.8';
 const FORGE_BUILD_DATE='2026-10-28';
 const q=(s,r=document)=>r.querySelector(s);
 const all=(s,r=document)=>Array.from(r.querySelectorAll(s));
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const DEFAULT_LOGO_SRC=document.querySelector('#brandMark img')?.getAttribute('src') || '';
-let state={changes:{},deleted:[],added:[],lineId:null,lineUrl:null,email:null,phone:null,logoSrc:null,releaseVersion:'V12.7',releaseNotes:'修正管理編輯文字換行與空白行；儲存、重新開啟及 HTML／ZIP 匯出均保留斷行'},selected=null,admin=false;
+let state={changes:{},deleted:[],added:[],lineId:null,lineUrl:null,email:null,phone:null,logoSrc:null,releaseVersion:'V12.8',releaseNotes:'固定 AI 對話示範尺寸；新增文字對齊、板塊位置／寬度及全站標題說明對齊'},selected=null,admin=false;
 let seq=0;
 // ID tags are assigned deterministically to original content. Extra sections get distinct stable IDs.
 const candidates='h1,h2,h3,h4,p,li,small,span,strong,em,b,label,summary,blockquote,figcaption,a,button,img,video,source,iframe,.deliver-card,.craft-card,.work,.svc,.faq,.promise-item,section,header,footer';
@@ -1894,8 +1913,18 @@ all(candidates).filter(el=>!el.closest('#forgeAdminPanel') && !el.closest('#forg
  if(!el.dataset.forgeNode)el.dataset.forgeNode='base-'+(++seq);
 });
 const originalMax=seq;
+const forgeLayoutContainers='.hero-copy,.sec-head,.showcase-intro,.deliver-card,.craft-tile,.v3-project-card,.sheet,.work,.ba-side,.ai-grid,.sheets,.wrap,.forge-new-section';
+function forgeTagLayoutContainers(){
+ all(forgeLayoutContainers).filter(el=>!el.closest('#forgeAdminPanel')).forEach(el=>{
+  if(el.dataset.forgeNode)return;
+  const anchor=el.querySelector('[data-forge-node]');if(!anchor)return;
+  const role=Array.from(el.classList).find(c=>forgeLayoutContainers.includes('.'+c))||'block';
+  el.dataset.forgeNode='layout-'+role+'-'+anchor.dataset.forgeNode;
+ });
+}
+forgeTagLayoutContainers();
 try{const saved=localStorage.getItem(STORE);if(saved)state=Object.assign(state,JSON.parse(saved));}catch(e){console.warn('Editor data unavailable',e)}
-if(!state.releaseVersion || /^V12(?:\.[0-6])?$/.test(state.releaseVersion))state.releaseVersion=FORGE_BUILD_VERSION;
+if(!state.releaseVersion || /^V12(?:\.[0-7])?$/.test(state.releaseVersion))state.releaseVersion=FORGE_BUILD_VERSION;
 if(typeof state.releaseNotes!=='string')state.releaseNotes='';
 const embedded=window.FORGE_PUBLISHED_EDITOR_STATE;
 if(embedded && !localStorage.getItem(STORE))state=Object.assign({changes:{},deleted:[],added:[]},embedded);
@@ -1935,12 +1964,30 @@ function forgeWriteText(el,text){
  el.textContent=String(text).replace(/\r\n?/g,'\n');
  el.classList.add('forge-multiline');
 }
+const forgeLayoutProperties=['text-align','width','max-width','margin-left','margin-right'];
+function forgeApplyLayout(el,layout){
+ if(!layout&&!el.dataset.forgeLayoutOriginal)return;
+ if(!el.dataset.forgeLayoutOriginal){const original={};for(const k of forgeLayoutProperties)original[k]={value:el.style.getPropertyValue(k),priority:el.style.getPropertyPriority(k)};el.dataset.forgeLayoutOriginal=JSON.stringify(original);}
+ let original={};try{original=JSON.parse(el.dataset.forgeLayoutOriginal)}catch(e){}
+ for(const k of forgeLayoutProperties){const v=original[k];if(v?.value)el.style.setProperty(k,v.value,v.priority||'');else el.style.removeProperty(k);}
+ delete el.dataset.forgeTextAlign;
+ if(!layout){delete el.dataset.forgeLayoutOriginal;return;}
+ if(['left','center','right'].includes(layout.textAlign)){el.style.textAlign=layout.textAlign;el.dataset.forgeTextAlign=layout.textAlign;}
+ if(typeof layout.width==='number'&&Number.isFinite(layout.width)){el.style.width=Math.max(20,Math.min(100,layout.width))+'%';el.style.maxWidth='100%';}
+ if(['left','center','right'].includes(layout.position)){el.style.marginLeft=layout.position==='left'?'0':'auto';el.style.marginRight=layout.position==='right'?'0':'auto';}
+}
+function forgeApplyPageAlign(){
+ if(['left','center','right'].includes(state.pageTextAlign))document.body.dataset.forgePageTextAlign=state.pageTextAlign;
+ else delete document.body.dataset.forgePageTextAlign;
+}
 function apply(){
  for(const row of state.added||[]){if(elFor(row.id))continue;const t=document.createElement('template');t.innerHTML=row.html;const el=t.content.firstElementChild;if(!el)continue;const anchor=q('#contact')||q('footer');if(anchor)anchor.before(el);else document.body.append(el)}
- for(const [id,c] of Object.entries(state.changes||{})){const el=elFor(id);if(!el)continue;if(typeof c.text==='string')forgeWriteText(el,c.text);if(typeof c.src==='string')el.setAttribute('src',c.src);if(typeof c.href==='string')el.setAttribute('href',c.href);if(typeof c.poster==='string')el.setAttribute('poster',c.poster);}
+ forgeTagLayoutContainers();
+ for(const [id,c] of Object.entries(state.changes||{})){const el=elFor(id);if(!el)continue;if(typeof c.text==='string')forgeWriteText(el,c.text);if('layout' in c)forgeApplyLayout(el,c.layout);if(typeof c.src==='string')el.setAttribute('src',c.src);if(typeof c.href==='string')el.setAttribute('href',c.href);if(typeof c.poster==='string')el.setAttribute('poster',c.poster);}
  for(const id of state.deleted||[]){const el=elFor(id);if(el)el.classList.add('forge-hidden')}
  applyContact();
  applyLogo();
+ forgeApplyPageAlign();
 }
 apply();
 function updateVersionUI(){
@@ -1953,12 +2000,12 @@ function updateVersionUI(){
 }
 const btn=document.createElement('button');btn.id='forgeAdminToggle';btn.textContent='✎ 編輯網站';btn.type='button';document.body.append(btn);
 const panel=document.createElement('aside');panel.id='forgeAdminPanel';panel.hidden=true;
-panel.innerHTML=`<div class="forgeHead"><h3>鍛模工坊 · 全站編輯 <span id="forgeVersionCurrent">V12.7</span></h3><button id="forgeClose" type="button">✕</button></div>
+panel.innerHTML=`<div class="forgeHead"><h3>鍛模工坊 · 全站編輯 <span id="forgeVersionCurrent">V12.8</span></h3><button id="forgeClose" type="button">✕</button></div>
 <p>先點選網站上想修改的文字、圖片、影片或區塊。管理介面只在編輯模式顯示；訪客模式不會看到區塊操作鈕。</p>
 <div id="forgeAdminToast" aria-live="polite"></div>
 <div style="padding:12px;border:1px solid #56647a;border-radius:12px;margin:12px 0;background:#18283e">
 <h3 style="margin:0 0 9px">版本管理／發布編號</h3>
-<label>目前網站版本（例如 V12、V12.7）</label><input id="forgeVersionInput" value="V12.7" maxlength="32" placeholder="V12.7">
+<label>目前網站版本（例如 V12、V12.8）</label><input id="forgeVersionInput" value="V12.8" maxlength="32" placeholder="V12.8">
 <label>本次更新紀錄</label><textarea id="forgeVersionNotes" placeholder="記錄這次改了哪些功能"></textarea>
 <button id="forgeSaveVersion" class="primary" type="button" style="width:100%;margin-top:9px">✓ 儲存版本與更新紀錄</button>
 <p style="font-size:12px;color:#b8c9df">匯出 ZIP 將使用這個編號命名；GitHub 訪客頁面也會顯示版本，方便確認是否更新成功。</p>
@@ -1983,6 +2030,21 @@ panel.innerHTML=`<div class="forgeHead"><h3>鍛模工坊 · 全站編輯 <span i
 <button id="forgeSaveContacts" class="primary" type="button" style="width:100%;margin-top:10px">✓ 儲存信箱與電話</button>
 <hr style="border-color:#3f4554;margin:18px 0">
 <label>目前選取</label><input id="forgeWhich" readonly value="尚未選取，請點網頁內容">
+<div id="forgeLayoutGroup">
+<h3>文字與板塊排版</h3>
+<p>點選文字後可調整對齊；按「選取所屬板塊」可調整整塊內容。文字儲存與排版套用分開操作。</p>
+<button id="forgeSelectBlock" type="button">▣ 選取所屬板塊</button>
+<label for="forgeTextAlign">所選文字對齊</label><select id="forgeTextAlign"><option value="">原本設定</option><option value="left">靠左</option><option value="center">置中</option><option value="right">靠右</option></select>
+<label for="forgeBlockPosition">所選內容位置</label><select id="forgeBlockPosition"><option value="">原本設定</option><option value="left">靠左</option><option value="center">置中</option><option value="right">靠右</option></select>
+<label><input id="forgeLayoutWidthEnabled" type="checkbox"> 自訂內容寬度</label>
+<div id="forgeLayoutWidthRow"><input id="forgeLayoutWidth" aria-label="內容寬度百分比" type="range" min="20" max="100" value="80" disabled><output id="forgeLayoutWidthValue">80%</output></div>
+<p>縮小內容寬度後，可用上方位置設定將整塊靠左、置中或靠右。手機仍會依畫面寬度換行。</p>
+<div class="forgeButtons"><button id="forgeApplyLayout" class="primary" type="button">✓ 套用所選排版</button><button id="forgeResetLayout" type="button">↶ 恢復此處排版</button></div>
+<hr style="border-color:#3f4554;margin:16px 0">
+<label for="forgePageTextAlign">全站標題與說明對齊</label><select id="forgePageTextAlign"><option value="">原本設定</option><option value="left">全部靠左</option><option value="center">全部置中</option><option value="right">全部靠右</option></select>
+<button id="forgeApplyPageAlign" type="button" style="width:100%;margin-top:10px">✓ 套用全站對齊</button>
+<p>個別內容的對齊設定優先；選回「原本設定」可恢復全站原版。</p>
+</div>
 <div id="forgeTextGroup" hidden><label>文字內容（按 Enter 換行，可保留空白行）</label><textarea id="forgeEditText"></textarea></div>
 <div id="forgeMediaGroup" hidden><label>圖片／影片來源網址（可貼 URL、data URL）</label><input id="forgeMediaUrl" placeholder="https://..."><label>也可選擇本機圖片或影片</label><input type="file" id="forgeMediaFile" accept="image/*,video/mp4,video/webm"></div>
 <div id="forgeLinkGroup" hidden><label>連結網址</label><input id="forgeLinkUrl" placeholder="https://..."></div>
@@ -1998,7 +2060,32 @@ panel.innerHTML=`<div class="forgeHead"><h3>鍛模工坊 · 全站編輯 <span i
 <p>重要：這是靜態網站編輯器，修改只儲存在目前瀏覽器。發布前請匯出 HTML 或完整 ZIP，再上傳至 GitHub。外部圖片和 YouTube 連結不會下載成檔案；在公開網站仍須可連線。編輯模式沒有登入驗證，不等同真正的網站後台。</p>`;
 document.body.append(panel);
 updateVersionUI();
-q('#forgeSaveVersion').onclick=()=>{const value=q('#forgeVersionInput').value.trim();if(!/^V?[0-9]+(?:\.[0-9]+){0,3}(?:[-_][a-zA-Z0-9]+)?$/.test(value))return toast('版本格式請使用 V12 或 V12.7');state.releaseVersion=value.startsWith('V')?value:'V'+value;state.releaseNotes=q('#forgeVersionNotes').value.trim();putSaved();toast('✓ 版本已更新為 '+state.releaseVersion+'，匯出時會套用此編號')};
+function forgeSyncLayoutControls(el){
+ const layout=state.changes?.[el.dataset.forgeNode]?.layout||{};
+ q('#forgeTextAlign').value=layout.textAlign||'';q('#forgeBlockPosition').value=layout.position||'';
+ const custom=typeof layout.width==='number';q('#forgeLayoutWidthEnabled').checked=custom;
+ q('#forgeLayoutWidth').disabled=!custom;q('#forgeLayoutWidth').value=custom?layout.width:80;
+ q('#forgeLayoutWidthValue').textContent=q('#forgeLayoutWidth').value+'%';
+}
+q('#forgePageTextAlign').value=state.pageTextAlign||'';
+q('#forgeSelectBlock').onclick=()=>{
+ if(!selected)return toast('請先點選想調整的文字或圖片');
+ const selector=forgeLayoutContainers+',section,header,footer';
+ const block=selected.matches(selector)?selected.parentElement?.closest(selector):selected.closest(selector);
+ if(!block||!block.dataset.forgeNode)return toast('已是最外層板塊，可直接調整目前選取內容');
+ choose(block);toast('已選取所屬板塊；再次按下可選取更外層');
+};
+q('#forgeLayoutWidthEnabled').onchange=()=>{q('#forgeLayoutWidth').disabled=!q('#forgeLayoutWidthEnabled').checked};
+q('#forgeLayoutWidth').oninput=()=>{q('#forgeLayoutWidthValue').textContent=q('#forgeLayoutWidth').value+'%'};
+q('#forgeApplyLayout').onclick=()=>{
+ if(!selected)return toast('請先點選想調整的內容');
+ const layout={textAlign:q('#forgeTextAlign').value,position:q('#forgeBlockPosition').value};
+ if(q('#forgeLayoutWidthEnabled').checked)layout.width=Number(q('#forgeLayoutWidth').value);
+ forgeApplyLayout(selected,layout);savedChange(selected,{layout});toast('✓ 排版已儲存；匯出 HTML 或 ZIP 會保留此設定');
+};
+q('#forgeResetLayout').onclick=()=>{if(!selected)return toast('請先點選想調整的內容');forgeApplyLayout(selected,null);savedChange(selected,{layout:null});forgeSyncLayoutControls(selected);toast('✓ 已恢復此處原本的排版，文字與圖片保持原樣')};
+q('#forgeApplyPageAlign').onclick=()=>{state.pageTextAlign=q('#forgePageTextAlign').value;forgeApplyPageAlign();putSaved();toast('✓ 全站標題與說明對齊已儲存')};
+q('#forgeSaveVersion').onclick=()=>{const value=q('#forgeVersionInput').value.trim();if(!/^V?[0-9]+(?:\.[0-9]+){0,3}(?:[-_][a-zA-Z0-9]+)?$/.test(value))return toast('版本格式請使用 V12 或 V12.8');state.releaseVersion=value.startsWith('V')?value:'V'+value;state.releaseNotes=q('#forgeVersionNotes').value.trim();putSaved();toast('✓ 版本已更新為 '+state.releaseVersion+'，匯出時會套用此編號')};
 function editing(x){admin=x;panel.hidden=!x;btn.textContent=x?'✓ 結束編輯':'✎ 編輯網站';document.body.classList.toggle('forge-editing',x);if(!x && selected){selected.classList.remove('forge-selected');selected=null}}
 applyLogo();
 q('#forgeLogoFile').onchange=async e=>{
@@ -2030,7 +2117,8 @@ btn.addEventListener('click',()=>editing(!admin));q('#forgeClose').onclick=()=>e
 function identify(el){if(el.tagName==='IMG')return '圖片';if(['VIDEO','SOURCE','IFRAME'].includes(el.tagName))return '影片／媒體';if(el.tagName==='SECTION')return '完整區塊';return el.tagName+' · '+el.textContent.trim().slice(0,26)}
 function choose(el){if(selected)selected.classList.remove('forge-selected');selected=el;el.classList.add('forge-selected');q('#forgeWhich').value=identify(el);
 const media=['IMG','VIDEO','SOURCE','IFRAME'].includes(el.tagName);
-q('#forgeTextGroup').hidden=media||el.tagName==='SECTION';q('#forgeMediaGroup').hidden=!media;q('#forgeLinkGroup').hidden=el.tagName!=='A';
+q('#forgeTextGroup').hidden=media||el.matches('section,header,footer,'+forgeLayoutContainers);
+forgeSyncLayoutControls(el);q('#forgeMediaGroup').hidden=!media;q('#forgeLinkGroup').hidden=el.tagName!=='A';
 q('#forgeEditText').value=forgeReadText(el);q('#forgeMediaUrl').value=el.getAttribute('src')||'';q('#forgeLinkUrl').value=el.getAttribute('href')||'';
 }
 document.addEventListener('click',e=>{if(!admin||e.target.closest('#forgeAdminPanel,#forgeAdminToggle,#compareAdmin'))return;
@@ -2045,10 +2133,10 @@ function fileAsData(f){return new Promise((resolve,reject)=>{const r=new FileRea
 q('#forgeDelete').onclick=()=>{if(!selected)return toast('請先選取內容');const el=selected;if(el.matches('body,html'))return;
 if(!confirm('確定要隱藏／刪除選取內容嗎？可用「還原刪除區塊」恢復。'))return;el.classList.add('forge-hidden');if(!state.deleted.includes(el.dataset.forgeNode))state.deleted.push(el.dataset.forgeNode);selected.classList.remove('forge-selected');selected=null;putSaved()};
 q('#forgeRestore').onclick=()=>{const id=state.deleted.pop();if(!id)return toast('沒有可還原的項目');const el=elFor(id);if(el){el.classList.remove('forge-hidden');el.scrollIntoView({behavior:'smooth',block:'center'})}putSaved()};
-q('#forgeDuplicate').onclick=()=>{if(!selected)return toast('請先選取區塊');let node=selected.closest('section')||selected;let copy=node.cloneNode(true);copy.classList.remove('forge-selected','forge-hidden');all('[data-forge-node]',copy).forEach(x=>x.removeAttribute('data-forge-node'));copy.removeAttribute('data-forge-node');copy.dataset.forgeNode='custom-'+Date.now().toString(36)+'-'+(++seq);rebindNew(copy);const contact=q('#contact')||q('footer');if(contact)contact.before(copy);else document.body.append(copy);state.added.push({id:copy.dataset.forgeNode,html:copy.outerHTML});putSaved();choose(copy);toast('已複製區塊；可以再點文字內容修改')};
+q('#forgeDuplicate').onclick=()=>{if(!selected)return toast('請先選取區塊');let node=selected.closest('section')||selected;let copy=node.cloneNode(true);copy.classList.remove('forge-selected','forge-hidden');all('[data-forge-node]',copy).forEach(x=>x.removeAttribute('data-forge-node'));copy.removeAttribute('data-forge-node');copy.dataset.forgeNode='custom-'+Date.now().toString(36)+'-'+(++seq);rebindNew(copy);const contact=q('#contact')||q('footer');if(contact)contact.before(copy);else document.body.append(copy);forgeTagLayoutContainers();state.added.push({id:copy.dataset.forgeNode,html:copy.outerHTML});putSaved();choose(copy);toast('已複製區塊；可以再點文字內容修改')};
 q('#forgeAddSection').onclick=async()=>{const title=q('#forgeNewTitle').value.trim(),body=q('#forgeNewBody').value.trim(),url=q('#forgeNewUrl').value.trim();if(!title)return toast('請先輸入新區塊標題');const file=q('#forgeNewFile').files[0];if(file&&file.size>20*1024*1024)return toast('本機檔案請小於 20MB，大型影片使用網址');let src=file?await fileAsData(file):url;const video=file?file.type.startsWith('video/'): /\.(mp4|webm)(\?|$)/i.test(src);
 const media=src?video?`<video controls preload="metadata" src="${esc(src)}"></video>`:`<img loading="lazy" alt="${esc(title)}" src="${esc(src)}">`:'';
-const node=document.createElement('section');node.className='forge-new-section';node.dataset.forgeNode='custom-'+Date.now().toString(36)+'-'+(++seq);node.innerHTML=`<div class="wrap"><h2>${esc(title)}</h2><p>${esc(body)}</p>${media}</div>`;rebindNew(node);const anchor=q('#contact')||q('footer');if(anchor)anchor.before(node);else document.body.append(node);state.added.push({id:node.dataset.forgeNode,html:node.outerHTML});putSaved();node.scrollIntoView({behavior:'smooth'});choose(node)};
+const node=document.createElement('section');node.className='forge-new-section';node.dataset.forgeNode='custom-'+Date.now().toString(36)+'-'+(++seq);node.innerHTML=`<div class="wrap"><h2>${esc(title)}</h2><p>${esc(body)}</p>${media}</div>`;rebindNew(node);const anchor=q('#contact')||q('footer');if(anchor)anchor.before(node);else document.body.append(node);forgeTagLayoutContainers();state.added.push({id:node.dataset.forgeNode,html:node.outerHTML});putSaved();node.scrollIntoView({behavior:'smooth'});choose(node)};
 function download(name,data,type){const a=document.createElement('a');const url=URL.createObjectURL(new Blob([data],{type}));a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),2000)}
 q('#forgeBackup').onclick=()=>download('鍛模工坊_全站編輯備份.json',JSON.stringify(state,null,2),'application/json');
 q('#forgeImport').onclick=()=>q('#forgeImportFile').click();q('#forgeImportFile').onchange=async e=>{try{const x=JSON.parse(await e.target.files[0].text());if(!x||typeof x.changes!=='object'||!Array.isArray(x.deleted)||!Array.isArray(x.added))throw Error('格式錯誤');localStorage.setItem(STORE,JSON.stringify(x));location.reload()}catch(err){toast('還原失敗：'+err.message)}};
