@@ -47,7 +47,7 @@ body:not(.forge-local-admin) .compare-admin {display:none!important}
 document.addEventListener('DOMContentLoaded',()=>{
  const admin=location.protocol==='file:';
  if(admin)document.body.classList.add('forge-local-admin');
- const indicator=document.createElement('div');indicator.id='forgeModeIndicator';indicator.textContent=(admin?'🔧 本機管理模式':'👁 公開訪客模式')+' · '+(window.FORGE_PUBLISHED_EDITOR_STATE?.releaseVersion||'V12.4');document.body.append(indicator);
+ const indicator=document.createElement('div');indicator.id='forgeModeIndicator';indicator.textContent=(admin?'🔧 本機管理模式':'👁 公開訪客模式')+' · '+(window.FORGE_PUBLISHED_EDITOR_STATE?.releaseVersion||'V12.5');document.body.append(indicator);
  if(!admin){
   const toggle=document.getElementById('v3Toggle');if(toggle)toggle.onclick=e=>{e.preventDefault();};
   const studio=document.getElementById('v3Studio');if(studio)studio.hidden=true;
@@ -63,8 +63,37 @@ document.addEventListener('DOMContentLoaded',()=>{
 #faq .faq, #trade-policies .forge-policy-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;max-width:none;align-items:start}
 #faq .faq details, #trade-policies .forge-policy-list details{min-width:0;width:100%;box-sizing:border-box}
 @media(max-width:700px){#faq .faq,#trade-policies .forge-policy-list{grid-template-columns:minmax(0,1fr)}}
-</style></head><body>
-<title>鍛模工坊 V12.4｜3D 展示與作品管理</title>
+</style><style id="forge-copy-polish-v125">
+/* V12.5: natural CJK sentence breaks on desktop and mobile without changing functionality. */
+html{line-break:strict}
+body{overflow-wrap:break-word}
+:where(p,li,summary,figcaption,blockquote,.desc,.note,.sub,.intro,.q-info,.steps span){
+  line-height:1.85;
+  word-break:normal;
+  text-wrap:pretty;
+  line-break:strict;
+  hanging-punctuation:none;
+}
+:where(.sec-head,.showcase-intro,.deliver-section,.craft-section,.q-hero) p{
+  max-width:52em;
+}
+:where(.sec-head,.showcase-intro) p{line-height:1.9}
+:where(.craft-tile,.deliver-card,.work-card,.faq details) p{line-height:1.85}
+.faq details p{max-width:48em;line-height:1.9}
+#trade-policies .sec-head>p{max-width:57em;line-height:1.95}
+.contact .wrap>div:first-child{min-width:0}
+.contact .forge-contact-copy{max-width:43em;line-height:1.95;letter-spacing:.012em;white-space:pre-line}
+.contact .line-id{line-height:1.8}
+.q-hero p{max-width:50em;line-height:1.9}
+@media(max-width:720px){
+  :where(p,li,summary,figcaption,blockquote,.desc,.note,.sub){line-height:1.85}
+  .contact .forge-contact-copy{max-width:100%;line-height:1.85}
+  .contact .wrap{row-gap:24px}
+  .sec-head p{line-height:1.85}
+}
+</style>
+</head><body>
+<title>鍛模工坊 V12.5｜3D 展示與作品管理</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -691,7 +720,7 @@ body.forge-editing .compare-admin{display:grid;gap:10px}
         <div class="hero-copy">
           <span class="eyebrow">Game Mod · AI Setup · 桃園</span>
           <h1><span class="m">遊戲模組</span>做出來，<br><span class="a">AI 工具</span>裝起來。</h1>
-          <p class="lead">武器裝備套用、特效、地圖修改，到幫你架好本機 AI、知識庫問答和 LINE 客服機器人。先看作品，再估個價，有問題直接 LINE 問。</p>
+          <p class="lead">從武器裝備、遊戲特效與地圖修改，到本機 AI、知識庫問答及 LINE 客服機器人，都能依需求討論。先瀏覽作品、了解服務，再使用估價工具。需要進一步確認，歡迎透過 LINE 聯繫。</p>
           <div class="hero-cta">
             <a class="btn btn-forge" href="#works">看作品</a>
             <a class="btn btn-glass" href="#quote">粗估報價</a>
@@ -729,7 +758,7 @@ body.forge-editing .compare-admin{display:grid;gap:10px}
         <div class="sec-head">
           <span class="eyebrow">3D Showroom</span>
           <h2>3D 模型展示室</h2>
-          <p>拖曳可以旋轉模型，切換三個製作階段，看一件裝備怎麼從線框做到發光特效。以下為網頁即時繪製的示範模型。</p>
+          <p>拖曳模型即可自由旋轉，也能切換三種製作階段。從線框、材質到發光特效，逐步查看模型的呈現方式。以下為網頁即時繪製的示範模型。</p>
         </div>
         <div class="sr-grid">
           <div class="sr-stage">
@@ -776,28 +805,28 @@ body.forge-editing .compare-admin{display:grid;gap:10px}
 
   <section class="craft-section" id="craft">
     <div class="wrap">
-      <div class="sec-head"><span class="eyebrow">From Concept To Game</span><h2>從想像，到遊戲裡真正看得見。</h2><p>不是只有做出模型。從檔案盤點、外觀製作到實際套用與測試，每一個環節都會影響成果。</p></div>
+      <div class="sec-head"><span class="eyebrow">From Concept To Game</span><h2>從想像，到遊戲裡真正看得見。</h2><p>製作不只是完成模型外觀。從檔案盤點、外觀調整，到套用與測試，每個環節都影響最終成果。</p></div>
       <div class="craft-steps">
-        <article class="craft-tile" data-step="01"><div class="craft-symbol">01</div><h3>素材與需求盤點</h3><p>確認參考圖、目標版本、原有骨架與素材格式，先釐清可以修改的範圍。</p></article>
-        <article class="craft-tile" data-step="02"><div class="craft-symbol">02</div><h3>模型與外觀調整</h3><p>處理輪廓、材質、貼圖方向與細節表現，兼顧辨識度與遊戲內觀看角度。</p></article>
-        <article class="craft-tile" data-step="03"><div class="craft-symbol">03</div><h3>骨架與特效整合</h3><p>依目標格式檢查掛點、動作相容性，以及粒子、光暈與呈現效果。</p></article>
-        <article class="craft-tile" data-step="04"><div class="craft-symbol">04</div><h3>實機檢查與交付</h3><p>核對檔案依賴、顯示結果與已約定的驗收項目，附上使用說明。</p></article>
+        <article class="craft-tile" data-step="01"><div class="craft-symbol">01</div><h3>素材與需求盤點</h3><p>先確認參考圖、遊戲版本、原有骨架與素材格式，再釐清可修改的範圍。</p></article>
+        <article class="craft-tile" data-step="02"><div class="craft-symbol">02</div><h3>模型與外觀調整</h3><p>調整模型輪廓、材質、貼圖與細節，兼顧辨識度及遊戲中的觀看角度。</p></article>
+        <article class="craft-tile" data-step="03"><div class="craft-symbol">03</div><h3>骨架與特效整合</h3><p>依目標格式檢查掛點與動作相容性，再確認粒子、光暈等特效的呈現。</p></article>
+        <article class="craft-tile" data-step="04"><div class="craft-symbol">04</div><h3>實機檢查與交付</h3><p>核對檔案依賴關係與顯示結果，依約定項目驗收，並附上必要的使用說明。</p></article>
       </div>
-      <div class="craft-cta"><div><strong>想做出類似的武器、裝備或場景？</strong><p>先透過上方 3D 展示切換外觀，再用估價工具選擇想要的製作方向。</p></div><a class="btn btn-forge" href="#quote">開始規劃與估價 →</a></div>
+      <div class="craft-cta"><div><strong>想做出類似的武器、裝備或場景？</strong><p>可先在 3D 展示區查看不同效果，再使用估價工具選擇需要的製作項目。</p></div><a class="btn btn-forge" href="#quote">開始規劃與估價 →</a></div>
     </div>
   </section>
   <section class="deliver-section" id="deliver">
     <div class="wrap">
-      <div class="showcase-intro"><span class="eyebrow">More Than A Preview</span><h2>作品做完，還要能接得上你的需求。</h2><p>模組、工具與 AI 系統的交付方式不同；我們把各類專案會討論的細節整理成清楚的項目。</p></div>
+      <div class="showcase-intro"><span class="eyebrow">More Than A Preview</span><h2>作品做完，還要能接得上你的需求。</h2><p>遊戲模組、軟體工具與 AI 系統的交付方式各不相同。以下整理各類專案需確認的重點，方便事先了解。</p></div>
       <div class="deliver-grid">
-        <article class="deliver-card"><span class="chip">GAME MOD</span><h3>遊戲模型與素材</h3><p>製作前先確認版本和素材來源，減少完成後才發現無法套用的風險。</p><ul><li>模型、貼圖與格式檢查</li><li>骨架、動作或掛點需求確認</li><li>特效搭配與展示截圖</li></ul></article>
-        <article class="deliver-card"><span class="chip">AI &amp; AUTOMATION</span><h3>AI 工具與工作流程</h3><p>不只追求能執行，也確認日常操作方式、資料來源與後續維護需求。</p><ul><li>使用情境與介面規劃</li><li>知識庫、工作流程整合</li><li>基本操作說明與測試項目</li></ul></article>
-        <article class="deliver-card"><span class="chip">HANDOFF</span><h3>專案交付與驗收</h3><p>交付項目依實際報價範圍確認，不讓規格與內容只停留在口頭溝通。</p><ul><li>交付檔案與版本說明</li><li>驗收項目與修改範圍</li><li>必要的安裝或使用指引</li></ul></article>
+        <article class="deliver-card"><span class="chip">GAME MOD</span><h3>遊戲模型與素材</h3><p>製作前先確認版本與素材來源，降低完成後無法套用的風險。</p><ul><li>模型、貼圖與格式檢查</li><li>骨架、動作或掛點需求確認</li><li>特效搭配與展示截圖</li></ul></article>
+        <article class="deliver-card"><span class="chip">AI &amp; AUTOMATION</span><h3>AI 工具與工作流程</h3><p>除了確認系統能正常執行，也會討論日常操作、資料來源及後續維護需求。</p><ul><li>使用情境與介面規劃</li><li>知識庫、工作流程整合</li><li>基本操作說明與測試項目</li></ul></article>
+        <article class="deliver-card"><span class="chip">HANDOFF</span><h3>專案交付與驗收</h3><p>交付項目以雙方確認的正式報價為準。規格、驗收內容與使用方式應事先明確約定。</p><ul><li>交付檔案與版本說明</li><li>驗收項目與修改範圍</li><li>必要的安裝或使用指引</li></ul></article>
       </div>
     </div>
   </section>
 
-  <section class="v3-banner" id="creator"><div class="wrap"><div><span class="v3-kicker">V3 · CREATOR STUDIO</span><h2>作品不只展示，也能由你親自更新。</h2><p>圖片、影片、YouTube 連結，直接加入你的作品牆。無須改寫程式碼。</p></div><div class="v3-actions"><button id="v3Toggle" class="v3-btn" type="button" aria-expanded="false">✦ 開啟作品管理</button><a class="v3-btn secondary" href="#works">觀看作品 ↓</a></div></div></section>
+  <section class="v3-banner" id="creator"><div class="wrap"><div><span class="v3-kicker">V3 · CREATOR STUDIO</span><h2>作品不只展示，也能由你親自更新。</h2><p>可加入圖片、影片或 YouTube 連結，更新作品展示內容。無須手動修改程式碼。</p></div><div class="v3-actions"><button id="v3Toggle" class="v3-btn" type="button" aria-expanded="false">✦ 開啟作品管理</button><a class="v3-btn secondary" href="#works">觀看作品 ↓</a></div></div></section>
   <section class="block" id="works">
     <div class="wrap">
       <div class="sec-head">
@@ -823,13 +852,13 @@ body.forge-editing .compare-admin{display:grid;gap:10px}
     </div>
   </section>
 
-  <section class="craft-section"><div class="wrap"><span class="eyebrow">WHY FORGE STUDIO</span><h2>從概念，到遊戲中的實際成果</h2><div class="v3-projects"><article class="v3-project-card"><div class="ico">⚔️</div><h3>360° 模型體驗</h3><p>選擇武器、盾牌或水晶，拖動模型檢視外觀、網格與特效階段，讓成品展示更有說服力。</p></article><article class="v3-project-card"><div class="ico">🎬</div><h3>動態展示內容</h3><p>遊戲實機畫面、技能特效影片、製作前後展示，都可以放入作品牆供訪客欣賞。</p></article><article class="v3-project-card"><div class="ico">🛠️</div><h3>依專案彈性委託</h3><p>根據模型相容性、遊戲版本、骨架與素材需求討論，再透過估價頁整理需求。</p></article></div><div class="v3-feature-tags"><span>3D 即時預覽</span><span>作品影片</span><span>圖片貼上</span><span>自訂展示內容</span><span>專案估價</span><span>LINE 詢價</span></div></div></section>
+  <section class="craft-section"><div class="wrap"><span class="eyebrow">WHY FORGE STUDIO</span><h2>從概念，到遊戲中的實際成果</h2><div class="v3-projects"><article class="v3-project-card"><div class="ico">⚔️</div><h3>360° 模型體驗</h3><p>選擇武器、盾牌或水晶，再拖曳模型查看外觀。也能切換網格與特效階段，了解不同展示效果。</p></article><article class="v3-project-card"><div class="ico">🎬</div><h3>動態展示內容</h3><p>作品牆可展示遊戲實機畫面、技能特效影片，以及製作前後的成果比較。</p></article><article class="v3-project-card"><div class="ico">🛠️</div><h3>依專案彈性委託</h3><p>先確認遊戲版本、模型相容性、骨架及素材需求，再利用估價頁整理委託項目。</p></article></div><div class="v3-feature-tags"><span>3D 即時預覽</span><span>作品影片</span><span>圖片貼上</span><span>自訂展示內容</span><span>專案估價</span><span>LINE 詢價</span></div></div></section>
   <section class="block alt" id="compare">
     <div class="wrap">
       <div class="sec-head">
         <span class="eyebrow">Before / After</span>
         <h2>改造前後對比</h2>
-        <p>左右拖曳中間的把手，比較改造前和改造後的差別。</p>
+        <p>拖曳圖片中間的把手，即可比較改造前與改造後的差異。</p>
       </div>
       <div class="ba-wrap">
         <div class="ba" id="ba">
@@ -865,7 +894,7 @@ body.forge-editing .compare-admin{display:grid;gap:10px}
       <div class="sec-head">
         <span class="eyebrow">AI Demo</span>
         <h2>AI 機器人對話示範</h2>
-        <p>點選情境，右邊的手機會播放對話過程。以下為示範內容，實際內容會依你的資料設定。</p>
+        <p>點選左側情境，右側手機將播放對話流程。以下為示範內容；正式使用時，回覆內容依實際設定為準。</p>
       </div>
       <div class="ai-grid">
         <div>
@@ -890,7 +919,7 @@ body.forge-editing .compare-admin{display:grid;gap:10px}
       <div class="sec-head">
         <span class="eyebrow">Services</span>
         <h2>服務項目與參考價</h2>
-        <p>價格為單件參考區間，實際依難度與數量確認後報價。寶石顏色代表價格級距。</p>
+        <p>下列金額為參考價格區間。正式報價依製作難度、數量與需求內容確認。不同寶石顏色代表不同價格級距。</p>
       </div>
       <div class="legend" aria-label="價格級距說明">
         <span><i class="gem r-common"></i>普通　5,000 內</span>
@@ -903,7 +932,7 @@ body.forge-editing .compare-admin{display:grid;gap:10px}
           <div class="sheet-head">
             <span class="eyebrow">MOD</span>
             <h3>遊戲模組製作</h3>
-            <p>模型套骨架、客製建模、特效、地圖，其他需求另報價。</p>
+            <p>提供模型套骨架、客製建模、遊戲特效與地圖調整。其他需求另行報價。</p>
             <svg viewBox="0 0 64 64" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"><path d="M46 6l12 0 0 12-26 26-12-12z"/><path d="M20 32l-6 6 12 12 6-6"/><path d="M14 38l-8 8 4 4 8-8M18 42l4 4"/><path d="M40 12l12 12"/></svg>
           </div>
           <ul class="spec" id="specMod"></ul>
@@ -913,7 +942,7 @@ body.forge-editing .compare-admin{display:grid;gap:10px}
           <div class="sheet-head">
             <span class="eyebrow">AI</span>
             <h3>軟體 AI 架設</h3>
-            <p>本機 AI、文件問答、聊天機器人與維護。</p>
+            <p>包含本機 AI、文件問答、聊天機器人建置及後續維護。</p>
             <svg viewBox="0 0 64 64" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"><rect x="16" y="16" width="32" height="32" rx="6"/><rect x="25" y="25" width="14" height="14" rx="2"/><path d="M24 16V8M32 16V8M40 16V8M24 56v-8M32 56v-8M40 56v-8M16 24H8M16 32H8M16 40H8M56 24h-8M56 32h-8M56 40h-8"/></svg>
           </div>
           <ul class="spec" id="specAi"></ul>
@@ -939,11 +968,11 @@ body.forge-editing .compare-admin{display:grid;gap:10px}
         <h2>合作流程</h2>
       </div>
       <ol class="steps">
-        <li><b>LINE 詢問</b><span>傳需求、參考圖或報價頁的估價內容。</span></li>
-        <li><b>確認需求</b><span>確認規格、數量、交期，必要時遠端看環境。</span></li>
-        <li><b>正式報價</b><span>報價確認後收訂金，開始排程。</span></li>
-        <li><b>製作回報</b><span>過程中傳截圖或影片，可以邊做邊調。</span></li>
-        <li><b>交付驗收</b><span>交檔、安裝或教學，驗收後付尾款。</span></li>
+        <li><b>LINE 詢問</b><span>提供需求說明、參考圖片，或報價頁產生的估價內容。</span></li>
+        <li><b>確認需求</b><span>確認製作規格、數量及交付時間。必要時以遠端方式檢查環境。</span></li>
+        <li><b>正式報價</b><span>雙方確認正式報價及付款方式後，依約定安排製作。</span></li>
+        <li><b>製作回報</b><span>製作期間視專案需要提供截圖或影片，供雙方確認進度。</span></li>
+        <li><b>交付驗收</b><span>依約定交付檔案、安裝或提供教學，完成驗收後依約支付尾款。</span></li>
       </ol>
     </div>
   </section>
@@ -955,12 +984,12 @@ body.forge-editing .compare-admin{display:grid;gap:10px}
         <h2>常見問題</h2>
       </div>
       <div class="faq">
-        <details><summary>報價頁的金額就是最後價格嗎？</summary><p>不是。報價頁只是粗估區間，方便你抓預算。實際價格要看檔案狀況、修改程度和交期，確認需求後會給正式報價。</p></details>
-        <details><summary>我的需求不在列表裡怎麼辦？</summary><p>在報價頁打開「特殊需求」，簡單寫下你想做的東西，例如遊戲系統功能、專用工具或整套改版，傳到 LINE 後再一起討論報價。</p></details>
-        <details><summary>AI 架設需要什麼電腦？</summary><p>看你要跑的模型大小。只做聊天或文件問答，一般有獨立顯示卡的電腦通常就能跑小型模型；要跑大模型，顯示卡記憶體越大越好。也可以改用雲端 API，電腦不用升級，但會有每月用量費用。可以先 LINE 傳電腦規格給我評估。</p></details>
-        <details><summary>交件後有問題怎麼辦？免費修正最多幾次？</summary><p>交付後 7 天內，就原約定需求範圍內的瑕疵提供免費修正，累計最高 10 次。一次修正指一次彙整提出的修正需求；不包含新增功能、變更規格或非原交付範圍的項目。超出次數或範圍會先另行報價，仍依雙方確認的個案約定與依法應負的瑕疵責任辦理。</p></details>
-        <details><summary>聯繫後多久會回覆？</summary><p>收到完整需求後預計 3～5 個工作天內初次回覆，不含週末及例假日；如需補充資料或專案較複雜，評估時間可能調整，並於聯繫時說明。</p></details>
-        <details><summary>可以接哪些遊戲的案子？</summary><p>只接客戶擁有合法授權或官方開放模組製作的專案，例如自製遊戲、支援模組的遊戲、或你自己擁有版權的素材。來源不明的伺服器端程式或侵權素材不承接。</p></details>
+        <details><summary>報價頁的金額就是最後價格嗎？</summary><p>不是。報價頁提供的是預估區間，方便先掌握預算。正式金額仍須依檔案狀況、修改程度及需求內容確認，並以正式報價為準。</p></details>
+        <details><summary>我的需求不在列表裡怎麼辦？</summary><p>請在報價頁開啟「特殊需求」，簡要說明委託內容。例如遊戲系統功能、專用工具或整套改版。整理後透過 LINE 傳送，再進一步討論與報價。</p></details>
+        <details><summary>AI 架設需要什麼電腦？</summary><p>需要依 AI 模型大小與使用情境評估。一般聊天或文件問答，可先評估較小型的模型；大型模型通常需要更多顯示記憶體。也可採用雲端 API，但可能產生額外使用費用。建議先透過 LINE 提供電腦規格與需求，以便評估。</p></details>
+        <details><summary>交件後有問題怎麼辦？免費修正最多幾次？</summary><p>交付後 7 天內，原約定需求範圍內的瑕疵可申請免費修正，累計最多 10 次。每次修正以一次彙整提出的需求清單計算。新增功能、變更規格或原範圍以外的項目，應另行確認報價。上述次數限制不影響依法應負的瑕疵責任。</p></details>
+        <details><summary>聯繫後多久會回覆？</summary><p>收到完整需求後，預計於 3～5 個工作天內初次回覆（不含週末及例假日）。若需要補充資料，或專案較為複雜，將於聯繫時說明後續評估安排。</p></details>
+        <details><summary>可以接哪些遊戲的案子？</summary><p>僅承接具合法授權，或由官方開放模組製作的專案。例如自製遊戲、支援模組的遊戲，以及客戶有權使用的素材。來源不明的伺服器程式與侵權素材，恕不承接。</p></details>
       </div>
     </div>
   </section>
@@ -969,14 +998,14 @@ body.forge-editing .compare-admin{display:grid;gap:10px}
   <section class="block alt" id="trade-policies" aria-label="交易說明與客戶權益">
     <div class="wrap">
       <div class="sec-head"><span class="eyebrow">Service &amp; Customer Care</span><h2>交易說明與客戶權益</h2>
-      <p>以下為付款、取消與退款、隱私及授權相關規範；報價、回覆時間、免費修正可見上方常見問題，交付驗收依專案書面約定。實際承作範圍、價格、交期、付款與使用授權，以雙方確認的書面報價及訂單內容為準；依法保障的權利不受以下說明限制。</p></div>
+      <p>本區說明付款、取消與退款、隱私及授權等事項。報價、回覆時間與免費修正規則，請參閱上方「常見問題」。專案範圍、交付安排、付款及授權條件，以雙方確認的書面報價與訂單為準。依法享有的權利不受以下說明限制。</p></div>
       <div class="faq forge-policy-list">
-        <details><summary>付款與訂單確認</summary><p>確認正式報價、製作範圍、訂金及付款方式後才開始排程。是否分階段收款、尾款支付時間與第三方服務費用，均以訂單或雙方書面確認內容為準。</p></details>
-        <details><summary>取消訂單與退款</summary><p>尚未開始製作時，可聯繫申請取消並依交易狀態及依法應適用的規定處理；開始製作後，依已完成工作、既有成本、約定內容與適用法律協商結算。符合法定解除權者，仍依法辦理。客製化服務或數位內容是否屬解除權例外，須符合事先告知等法定條件，不一概排除退款。</p></details>
-        <details><summary>隱私及資料使用</summary><p>為需求評估、報價、履約、售後服務與必要聯繫，可能使用您提供的姓名或暱稱、聯絡資訊、需求文件與交易資料。僅在履約必要、依法要求或獲同意時提供予第三方；如透過 LINE、電子郵件或金流服務聯繫與付款，相關平台亦依其政策處理資料。可透過下方聯絡方式洽詢資料相關事項。</p></details>
-        <details><summary>素材合法性與使用授權</summary><p>客戶應確保交付素材及委託用途具合法使用授權；不承接明知侵權或違法內容。製作成果的原始檔、授權使用範圍、再散布及商用權利，依個別訂單書面約定；未明示者請在付款前確認。</p></details>
+        <details><summary>付款與訂單確認</summary><p>雙方確認正式報價、製作範圍、訂金與付款方式後，再依約安排製作。分階段付款、尾款期限及第三方服務費用，以訂單或雙方書面確認內容為準。</p></details>
+        <details><summary>取消訂單與退款</summary><p>尚未開始製作時，可聯繫申請取消，並依交易狀態及適用法律處理。開始製作後，依已完成工作、既有成本、雙方約定與適用法律協商結算。若依法享有解除權，仍按法律規定辦理。客製化服務或數位內容是否適用解除權例外，須符合事先告知等法定條件，不一概排除退款。</p></details>
+        <details><summary>隱私及資料使用</summary><p>為評估需求、提供報價、履行訂單與售後聯繫，可能使用您提供的姓名或暱稱、聯絡資訊、需求文件及交易資料。僅於履約必要、依法要求或經您同意時，向第三方提供相關資料。透過 LINE、電子郵件或金流服務聯繫及付款時，相關平台另依其政策處理資料。如有資料相關疑問，可使用下方聯絡方式洽詢。</p></details>
+        <details><summary>素材合法性與使用授權</summary><p>客戶應確保提供的素材及委託用途具有合法授權。明知涉及侵權或違法的內容，恕不承接。成果原始檔的交付、使用授權範圍、再散布及商用權利，均依個別訂單書面約定；如未明示，請於付款前確認。</p></details>
       </div>
-      <p class="forge-policy-small">如需取消訂單、申請退款、提出瑕疵修正或隱私相關請求，請使用下方官方 LINE、信箱或聯絡電話。請於訂購前確認上述條件與正式報價內容。</p>
+      <p class="forge-policy-small">若需取消訂單、申請退款、提出瑕疵修正或洽詢個人資料相關事項，請透過下方官方 LINE、信箱或聯絡電話聯繫。訂購前請先確認交易條款與正式報價內容。</p>
     </div>
   </section>
 
@@ -984,7 +1013,7 @@ body.forge-editing .compare-admin{display:grid;gap:10px}
     <div class="wrap">
       <div>
         <h2>有想法？直接 LINE 問最快。</h2>
-        <p>傳參考圖、遊戲名稱或你想做的 AI 用途，預計於收到完整資料後 3～5 個工作天內初次回覆（不含例假日）；實際製作交期另行確認。</p>
+        <p class="forge-contact-copy">請提供參考圖片、遊戲名稱，或想製作的 AI 應用。<br>收到完整需求後，預計於 3～5 個工作天內初次回覆（不含例假日）。</p>
         <div class="line-id">官方 LINE ID：<code class="js-line-id">@your-line-id</code><button class="copy-mini js-copy-id" type="button">複製 ID</button></div>
         <div class="forge-contact-extra" id="forgeContactExtra" style="display:grid;gap:8px;margin-top:14px">
           <div class="forge-email-row" hidden>✉ 聯絡信箱：<a class="forge-email-link" href="#"></a></div>
@@ -1024,7 +1053,7 @@ document.addEventListener('DOMContentLoaded', function(){
       <div class="wrap">
         <span class="eyebrow">Estimate</span>
         <h1>粗估報價單</h1>
-        <p>選項目和數量，估價明細會即時算出價格區間。列表沒有的需求，打開「特殊需求」寫下來，會另外報價。估完一鍵複製並開啟 LINE 傳給我。</p>
+        <p>選擇服務項目及數量，即可取得即時估算的價格區間。若有列表以外的需求，請在「特殊需求」欄位補充說明，另行評估報價。完成後可複製估價內容，透過 LINE 傳送洽詢。</p>
       </div>
     </section>
   </div>
@@ -1843,13 +1872,13 @@ if (location.protocol !== "file:") { console.info("公開站點：僅供瀏覽�
 
 (function(){"use strict";
 const STORE='forge-studio-v4-editor-state';
-const FORGE_BUILD_VERSION='V12.4';
-const FORGE_BUILD_DATE='2026-10-27';
+const FORGE_BUILD_VERSION='V12.5';
+const FORGE_BUILD_DATE='2026-10-28';
 const q=(s,r=document)=>r.querySelector(s);
 const all=(s,r=document)=>Array.from(r.querySelectorAll(s));
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const DEFAULT_LOGO_SRC=document.querySelector('#brandMark img')?.getAttribute('src') || '';
-let state={changes:{},deleted:[],added:[],lineId:null,lineUrl:null,email:null,phone:null,logoSrc:null,releaseVersion:'V12.4',releaseNotes:'常見問題與交易條款改為雙欄可收合列表，移除重複的交付、修改、報價與回覆說明'},selected=null,admin=false;
+let state={changes:{},deleted:[],added:[],lineId:null,lineUrl:null,email:null,phone:null,logoSrc:null,releaseVersion:'V12.5',releaseNotes:'全站文字斷句與排版調整；LINE 聯絡區精簡文字，移除製作交期句子'},selected=null,admin=false;
 let seq=0;
 // ID tags are assigned deterministically to original content. Extra sections get distinct stable IDs.
 const candidates='h1,h2,h3,h4,p,li,small,span,strong,em,b,label,summary,blockquote,figcaption,a,button,img,video,source,iframe,.deliver-card,.craft-card,.work,.svc,.faq,.promise-item,section,header,footer';
@@ -1858,7 +1887,7 @@ all(candidates).filter(el=>!el.closest('#forgeAdminPanel') && !el.closest('#forg
 });
 const originalMax=seq;
 try{const saved=localStorage.getItem(STORE);if(saved)state=Object.assign(state,JSON.parse(saved));}catch(e){console.warn('Editor data unavailable',e)}
-if(!state.releaseVersion || state.releaseVersion==='V12')state.releaseVersion=FORGE_BUILD_VERSION;
+if(!state.releaseVersion || /^V12(?:\.[0-4])?$/.test(state.releaseVersion))state.releaseVersion=FORGE_BUILD_VERSION;
 if(typeof state.releaseNotes!=='string')state.releaseNotes='';
 const embedded=window.FORGE_PUBLISHED_EDITOR_STATE;
 if(embedded && !localStorage.getItem(STORE))state=Object.assign({changes:{},deleted:[],added:[]},embedded);
@@ -1907,12 +1936,12 @@ function updateVersionUI(){
 }
 const btn=document.createElement('button');btn.id='forgeAdminToggle';btn.textContent='✎ 編輯網站';btn.type='button';document.body.append(btn);
 const panel=document.createElement('aside');panel.id='forgeAdminPanel';panel.hidden=true;
-panel.innerHTML=`<div class="forgeHead"><h3>鍛模工坊 · 全站編輯 <span id="forgeVersionCurrent">V12.4</span></h3><button id="forgeClose" type="button">✕</button></div>
+panel.innerHTML=`<div class="forgeHead"><h3>鍛模工坊 · 全站編輯 <span id="forgeVersionCurrent">V12.5</span></h3><button id="forgeClose" type="button">✕</button></div>
 <p>先點選網站上想修改的文字、圖片、影片或區塊。管理介面只在編輯模式顯示；訪客模式不會看到區塊操作鈕。</p>
 <div id="forgeAdminToast" aria-live="polite"></div>
 <div style="padding:12px;border:1px solid #56647a;border-radius:12px;margin:12px 0;background:#18283e">
 <h3 style="margin:0 0 9px">版本管理／發布編號</h3>
-<label>目前網站版本（例如 V12、V12.4）</label><input id="forgeVersionInput" value="V12.4" maxlength="32" placeholder="V12.4">
+<label>目前網站版本（例如 V12、V12.5）</label><input id="forgeVersionInput" value="V12.5" maxlength="32" placeholder="V12.5">
 <label>本次更新紀錄</label><textarea id="forgeVersionNotes" placeholder="記錄這次改了哪些功能"></textarea>
 <button id="forgeSaveVersion" class="primary" type="button" style="width:100%;margin-top:9px">✓ 儲存版本與更新紀錄</button>
 <p style="font-size:12px;color:#b8c9df">匯出 ZIP 將使用這個編號命名；GitHub 訪客頁面也會顯示版本，方便確認是否更新成功。</p>
@@ -1952,7 +1981,7 @@ panel.innerHTML=`<div class="forgeHead"><h3>鍛模工坊 · 全站編輯 <span i
 <p>重要：這是靜態網站編輯器，修改只儲存在目前瀏覽器。發布前請匯出 HTML 或完整 ZIP，再上傳至 GitHub。外部圖片和 YouTube 連結不會下載成檔案；在公開網站仍須可連線。編輯模式沒有登入驗證，不等同真正的網站後台。</p>`;
 document.body.append(panel);
 updateVersionUI();
-q('#forgeSaveVersion').onclick=()=>{const value=q('#forgeVersionInput').value.trim();if(!/^V?[0-9]+(?:\.[0-9]+){0,3}(?:[-_][a-zA-Z0-9]+)?$/.test(value))return toast('版本格式請使用 V12 或 V12.4');state.releaseVersion=value.startsWith('V')?value:'V'+value;state.releaseNotes=q('#forgeVersionNotes').value.trim();putSaved();toast('✓ 版本已更新為 '+state.releaseVersion+'，匯出時會套用此編號')};
+q('#forgeSaveVersion').onclick=()=>{const value=q('#forgeVersionInput').value.trim();if(!/^V?[0-9]+(?:\.[0-9]+){0,3}(?:[-_][a-zA-Z0-9]+)?$/.test(value))return toast('版本格式請使用 V12 或 V12.5');state.releaseVersion=value.startsWith('V')?value:'V'+value;state.releaseNotes=q('#forgeVersionNotes').value.trim();putSaved();toast('✓ 版本已更新為 '+state.releaseVersion+'，匯出時會套用此編號')};
 function editing(x){admin=x;panel.hidden=!x;btn.textContent=x?'✓ 結束編輯':'✎ 編輯網站';document.body.classList.toggle('forge-editing',x);if(!x && selected){selected.classList.remove('forge-selected');selected=null}}
 applyLogo();
 q('#forgeLogoFile').onchange=async e=>{
