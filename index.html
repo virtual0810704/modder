@@ -47,7 +47,7 @@ body:not(.forge-local-admin) .compare-admin {display:none!important}
 document.addEventListener('DOMContentLoaded',()=>{
  const admin=location.protocol==='file:';
  if(admin)document.body.classList.add('forge-local-admin');
- const indicator=document.createElement('div');indicator.id='forgeModeIndicator';indicator.textContent=(admin?'🔧 本機管理模式':'👁 公開訪客模式')+' · '+(window.FORGE_PUBLISHED_EDITOR_STATE?.releaseVersion||'V12.5');document.body.append(indicator);
+ const indicator=document.createElement('div');indicator.id='forgeModeIndicator';indicator.textContent=(admin?'🔧 本機管理模式':'👁 公開訪客模式')+' · '+(window.FORGE_PUBLISHED_EDITOR_STATE?.releaseVersion||'V12.7');document.body.append(indicator);
  if(!admin){
   const toggle=document.getElementById('v3Toggle');if(toggle)toggle.onclick=e=>{e.preventDefault();};
   const studio=document.getElementById('v3Studio');if(studio)studio.hidden=true;
@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded',()=>{
 #faq .faq details, #trade-policies .forge-policy-list details{min-width:0;width:100%;box-sizing:border-box}
 @media(max-width:700px){#faq .faq,#trade-policies .forge-policy-list{grid-template-columns:minmax(0,1fr)}}
 </style><style id="forge-copy-polish-v125">
-/* V12.5: natural CJK sentence breaks on desktop and mobile without changing functionality. */
+/* V12.7: natural CJK sentence breaks on desktop and mobile without changing functionality. */
 html{line-break:strict}
 body{overflow-wrap:break-word}
 :where(p,li,summary,figcaption,blockquote,.desc,.note,.sub,.intro,.q-info,.steps span){
@@ -92,8 +92,16 @@ body{overflow-wrap:break-word}
   .sec-head p{line-height:1.85}
 }
 </style>
+<style id="forge-requested-layout-v126">
+.sheets>.sheet{display:grid;grid-template-rows:subgrid;grid-row:span 3}
+@media(max-width:860px){.sheets>.sheet{display:block;grid-row:auto}}
+</style>
+<style id="forge-editor-linebreaks-v127">
+/* Preserve line breaks and blank lines entered in the plain-text editor. */
+.forge-multiline{white-space:pre-wrap!important}
+</style>
 </head><body>
-<title>鍛模工坊 V12.5｜3D 展示與作品管理</title>
+<title>鍛模工坊 V12.7｜3D 展示與作品管理</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -718,9 +726,9 @@ body.forge-editing .compare-admin{display:grid;gap:10px}
     <section class="hero">
       <div class="wrap">
         <div class="hero-copy">
-          <span class="eyebrow">Game Mod · AI Setup · 桃園</span>
-          <h1><span class="m">遊戲模組</span>做出來，<br><span class="a">AI 工具</span>裝起來。</h1>
-          <p class="lead">從武器裝備、遊戲特效與地圖修改，到本機 AI、知識庫問答及 LINE 客服機器人，都能依需求討論。先瀏覽作品、了解服務，再使用估價工具。需要進一步確認，歡迎透過 LINE 聯繫。</p>
+          <span class="eyebrow">Game Mod · AI Setup</span>
+          <h1><span class="m">遊戲模組</span>做出來<br><span class="a">AI 工具</span>裝起來</h1>
+          <p class="lead">從武器裝備、遊戲特效與地圖修改，<br>到本機 AI、知識庫問答及 LINE 客服機器人，都能依需求討論。<br>先瀏覽作品、了解服務，再使用估價工具。<br>需要進一步確認，歡迎透過 LINE 聯繫。</p>
           <div class="hero-cta">
             <a class="btn btn-forge" href="#works">看作品</a>
             <a class="btn btn-glass" href="#quote">粗估報價</a>
@@ -758,7 +766,7 @@ body.forge-editing .compare-admin{display:grid;gap:10px}
         <div class="sec-head">
           <span class="eyebrow">3D Showroom</span>
           <h2>3D 模型展示室</h2>
-          <p>拖曳模型即可自由旋轉，也能切換三種製作階段。從線框、材質到發光特效，逐步查看模型的呈現方式。以下為網頁即時繪製的示範模型。</p>
+          <p>拖曳模型即可自由旋轉，也能切換三種製作階段。<br>從線框、材質到發光特效，逐步查看模型的呈現方式。以下為網頁即時繪製的示範模型。</p>
         </div>
         <div class="sr-grid">
           <div class="sr-stage">
@@ -817,11 +825,11 @@ body.forge-editing .compare-admin{display:grid;gap:10px}
   </section>
   <section class="deliver-section" id="deliver">
     <div class="wrap">
-      <div class="showcase-intro"><span class="eyebrow">More Than A Preview</span><h2>作品做完，還要能接得上你的需求。</h2><p>遊戲模組、軟體工具與 AI 系統的交付方式各不相同。以下整理各類專案需確認的重點，方便事先了解。</p></div>
+      <div class="showcase-intro"><span class="eyebrow">More Than A Preview</span><h2>作品做完，還要能接得上你的需求。</h2><p>遊戲模組、軟體工具與 AI 系統的交付方式各不相同。<br>以下整理各類專案需確認的重點，方便事先了解。</p></div>
       <div class="deliver-grid">
-        <article class="deliver-card"><span class="chip">GAME MOD</span><h3>遊戲模型與素材</h3><p>製作前先確認版本與素材來源，降低完成後無法套用的風險。</p><ul><li>模型、貼圖與格式檢查</li><li>骨架、動作或掛點需求確認</li><li>特效搭配與展示截圖</li></ul></article>
-        <article class="deliver-card"><span class="chip">AI &amp; AUTOMATION</span><h3>AI 工具與工作流程</h3><p>除了確認系統能正常執行，也會討論日常操作、資料來源及後續維護需求。</p><ul><li>使用情境與介面規劃</li><li>知識庫、工作流程整合</li><li>基本操作說明與測試項目</li></ul></article>
-        <article class="deliver-card"><span class="chip">HANDOFF</span><h3>專案交付與驗收</h3><p>交付項目以雙方確認的正式報價為準。規格、驗收內容與使用方式應事先明確約定。</p><ul><li>交付檔案與版本說明</li><li>驗收項目與修改範圍</li><li>必要的安裝或使用指引</li></ul></article>
+        <article class="deliver-card"><span class="chip">GAME MOD</span><h3>遊戲模型與素材</h3><p>製作前先確認版本與素材來源，<br>降低完成後無法套用的風險。</p><ul><li>模型、貼圖與格式檢查</li><li>骨架、動作或掛點需求確認</li><li>特效搭配與展示截圖</li></ul></article>
+        <article class="deliver-card"><span class="chip">AI &amp; AUTOMATION</span><h3>AI 工具與工作流程</h3><p>除了確認系統能正常執行，<br>也會討論日常操作、資料來源及後續維護需求。</p><ul><li>使用情境與介面規劃</li><li>知識庫、工作流程整合</li><li>基本操作說明與測試項目</li></ul></article>
+        <article class="deliver-card"><span class="chip">HANDOFF</span><h3>專案交付與驗收</h3><p>交付項目以雙方確認的正式報價為準。<br>規格、驗收內容與使用方式應事先明確約定。</p><ul><li>交付檔案與版本說明</li><li>驗收項目與修改範圍</li><li>必要的安裝或使用指引</li></ul></article>
       </div>
     </div>
   </section>
@@ -852,7 +860,7 @@ body.forge-editing .compare-admin{display:grid;gap:10px}
     </div>
   </section>
 
-  <section class="craft-section"><div class="wrap"><span class="eyebrow">WHY FORGE STUDIO</span><h2>從概念，到遊戲中的實際成果</h2><div class="v3-projects"><article class="v3-project-card"><div class="ico">⚔️</div><h3>360° 模型體驗</h3><p>選擇武器、盾牌或水晶，再拖曳模型查看外觀。也能切換網格與特效階段，了解不同展示效果。</p></article><article class="v3-project-card"><div class="ico">🎬</div><h3>動態展示內容</h3><p>作品牆可展示遊戲實機畫面、技能特效影片，以及製作前後的成果比較。</p></article><article class="v3-project-card"><div class="ico">🛠️</div><h3>依專案彈性委託</h3><p>先確認遊戲版本、模型相容性、骨架及素材需求，再利用估價頁整理委託項目。</p></article></div><div class="v3-feature-tags"><span>3D 即時預覽</span><span>作品影片</span><span>圖片貼上</span><span>自訂展示內容</span><span>專案估價</span><span>LINE 詢價</span></div></div></section>
+  <section class="craft-section"><div class="wrap"><span class="eyebrow">WHY FORGE STUDIO</span><h2>從概念，到遊戲中的實際成果</h2><div class="v3-projects"><article class="v3-project-card"><div class="ico">⚔️</div><h3>360° 模型體驗</h3><p>選擇武器、盾牌或水晶，再拖曳模型查看外觀。<br>也能切換網格與特效階段，了解不同展示效果。</p></article><article class="v3-project-card"><div class="ico">🎬</div><h3>動態展示內容</h3><p>作品牆可展示遊戲實機畫面、技能特效影片，<br>以及製作前後的成果比較。</p></article><article class="v3-project-card"><div class="ico">🛠️</div><h3>依專案彈性委託</h3><p>先確認遊戲版本、模型相容性、骨架及素材需求，<br>再利用估價頁整理委託項目。</p></article></div><div class="v3-feature-tags"><span>3D 即時預覽</span><span>作品影片</span><span>圖片貼上</span><span>自訂展示內容</span><span>專案估價</span><span>LINE 詢價</span></div></div></section>
   <section class="block alt" id="compare">
     <div class="wrap">
       <div class="sec-head">
@@ -919,7 +927,7 @@ body.forge-editing .compare-admin{display:grid;gap:10px}
       <div class="sec-head">
         <span class="eyebrow">Services</span>
         <h2>服務項目與參考價</h2>
-        <p>下列金額為參考價格區間。正式報價依製作難度、數量與需求內容確認。不同寶石顏色代表不同價格級距。</p>
+        <p>下列金額為參考價格區間。<br>正式報價依製作難度、數量與需求內容確認。<br>不同寶石顏色代表不同價格級距。</p>
       </div>
       <div class="legend" aria-label="價格級距說明">
         <span><i class="gem r-common"></i>普通　5,000 內</span>
@@ -932,7 +940,7 @@ body.forge-editing .compare-admin{display:grid;gap:10px}
           <div class="sheet-head">
             <span class="eyebrow">MOD</span>
             <h3>遊戲模組製作</h3>
-            <p>提供模型套骨架、客製建模、遊戲特效與地圖調整。其他需求另行報價。</p>
+            <p>提供模型套骨架、客製建模、遊戲特效與地圖調整。<br>其他需求另行報價。</p>
             <svg viewBox="0 0 64 64" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"><path d="M46 6l12 0 0 12-26 26-12-12z"/><path d="M20 32l-6 6 12 12 6-6"/><path d="M14 38l-8 8 4 4 8-8M18 42l4 4"/><path d="M40 12l12 12"/></svg>
           </div>
           <ul class="spec" id="specMod"></ul>
@@ -1872,13 +1880,13 @@ if (location.protocol !== "file:") { console.info("公開站點：僅供瀏覽�
 
 (function(){"use strict";
 const STORE='forge-studio-v4-editor-state';
-const FORGE_BUILD_VERSION='V12.5';
+const FORGE_BUILD_VERSION='V12.7';
 const FORGE_BUILD_DATE='2026-10-28';
 const q=(s,r=document)=>r.querySelector(s);
 const all=(s,r=document)=>Array.from(r.querySelectorAll(s));
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const DEFAULT_LOGO_SRC=document.querySelector('#brandMark img')?.getAttribute('src') || '';
-let state={changes:{},deleted:[],added:[],lineId:null,lineUrl:null,email:null,phone:null,logoSrc:null,releaseVersion:'V12.5',releaseNotes:'全站文字斷句與排版調整；LINE 聯絡區精簡文字，移除製作交期句子'},selected=null,admin=false;
+let state={changes:{},deleted:[],added:[],lineId:null,lineUrl:null,email:null,phone:null,logoSrc:null,releaseVersion:'V12.7',releaseNotes:'修正管理編輯文字換行與空白行；儲存、重新開啟及 HTML／ZIP 匯出均保留斷行'},selected=null,admin=false;
 let seq=0;
 // ID tags are assigned deterministically to original content. Extra sections get distinct stable IDs.
 const candidates='h1,h2,h3,h4,p,li,small,span,strong,em,b,label,summary,blockquote,figcaption,a,button,img,video,source,iframe,.deliver-card,.craft-card,.work,.svc,.faq,.promise-item,section,header,footer';
@@ -1887,7 +1895,7 @@ all(candidates).filter(el=>!el.closest('#forgeAdminPanel') && !el.closest('#forg
 });
 const originalMax=seq;
 try{const saved=localStorage.getItem(STORE);if(saved)state=Object.assign(state,JSON.parse(saved));}catch(e){console.warn('Editor data unavailable',e)}
-if(!state.releaseVersion || /^V12(?:\.[0-4])?$/.test(state.releaseVersion))state.releaseVersion=FORGE_BUILD_VERSION;
+if(!state.releaseVersion || /^V12(?:\.[0-6])?$/.test(state.releaseVersion))state.releaseVersion=FORGE_BUILD_VERSION;
 if(typeof state.releaseNotes!=='string')state.releaseNotes='';
 const embedded=window.FORGE_PUBLISHED_EDITOR_STATE;
 if(embedded && !localStorage.getItem(STORE))state=Object.assign({changes:{},deleted:[],added:[]},embedded);
@@ -1918,9 +1926,18 @@ function applyContact(){
  const emailInput=q('#forgeEmail');if(emailInput&&document.activeElement!==emailInput)emailInput.value=email;
  const phoneInput=q('#forgePhone');if(phoneInput&&document.activeElement!==phoneInput)phoneInput.value=phone;
 }
+function forgeReadText(el){
+ const copy=el.cloneNode(true);
+ copy.querySelectorAll('br').forEach(br=>br.replaceWith('\n'));
+ return el.classList.contains('forge-multiline')?copy.textContent:copy.textContent.trim();
+}
+function forgeWriteText(el,text){
+ el.textContent=String(text).replace(/\r\n?/g,'\n');
+ el.classList.add('forge-multiline');
+}
 function apply(){
  for(const row of state.added||[]){if(elFor(row.id))continue;const t=document.createElement('template');t.innerHTML=row.html;const el=t.content.firstElementChild;if(!el)continue;const anchor=q('#contact')||q('footer');if(anchor)anchor.before(el);else document.body.append(el)}
- for(const [id,c] of Object.entries(state.changes||{})){const el=elFor(id);if(!el)continue;if(typeof c.text==='string')el.textContent=c.text;if(typeof c.src==='string')el.setAttribute('src',c.src);if(typeof c.href==='string')el.setAttribute('href',c.href);if(typeof c.poster==='string')el.setAttribute('poster',c.poster);}
+ for(const [id,c] of Object.entries(state.changes||{})){const el=elFor(id);if(!el)continue;if(typeof c.text==='string')forgeWriteText(el,c.text);if(typeof c.src==='string')el.setAttribute('src',c.src);if(typeof c.href==='string')el.setAttribute('href',c.href);if(typeof c.poster==='string')el.setAttribute('poster',c.poster);}
  for(const id of state.deleted||[]){const el=elFor(id);if(el)el.classList.add('forge-hidden')}
  applyContact();
  applyLogo();
@@ -1936,12 +1953,12 @@ function updateVersionUI(){
 }
 const btn=document.createElement('button');btn.id='forgeAdminToggle';btn.textContent='✎ 編輯網站';btn.type='button';document.body.append(btn);
 const panel=document.createElement('aside');panel.id='forgeAdminPanel';panel.hidden=true;
-panel.innerHTML=`<div class="forgeHead"><h3>鍛模工坊 · 全站編輯 <span id="forgeVersionCurrent">V12.5</span></h3><button id="forgeClose" type="button">✕</button></div>
+panel.innerHTML=`<div class="forgeHead"><h3>鍛模工坊 · 全站編輯 <span id="forgeVersionCurrent">V12.7</span></h3><button id="forgeClose" type="button">✕</button></div>
 <p>先點選網站上想修改的文字、圖片、影片或區塊。管理介面只在編輯模式顯示；訪客模式不會看到區塊操作鈕。</p>
 <div id="forgeAdminToast" aria-live="polite"></div>
 <div style="padding:12px;border:1px solid #56647a;border-radius:12px;margin:12px 0;background:#18283e">
 <h3 style="margin:0 0 9px">版本管理／發布編號</h3>
-<label>目前網站版本（例如 V12、V12.5）</label><input id="forgeVersionInput" value="V12.5" maxlength="32" placeholder="V12.5">
+<label>目前網站版本（例如 V12、V12.7）</label><input id="forgeVersionInput" value="V12.7" maxlength="32" placeholder="V12.7">
 <label>本次更新紀錄</label><textarea id="forgeVersionNotes" placeholder="記錄這次改了哪些功能"></textarea>
 <button id="forgeSaveVersion" class="primary" type="button" style="width:100%;margin-top:9px">✓ 儲存版本與更新紀錄</button>
 <p style="font-size:12px;color:#b8c9df">匯出 ZIP 將使用這個編號命名；GitHub 訪客頁面也會顯示版本，方便確認是否更新成功。</p>
@@ -1966,7 +1983,7 @@ panel.innerHTML=`<div class="forgeHead"><h3>鍛模工坊 · 全站編輯 <span i
 <button id="forgeSaveContacts" class="primary" type="button" style="width:100%;margin-top:10px">✓ 儲存信箱與電話</button>
 <hr style="border-color:#3f4554;margin:18px 0">
 <label>目前選取</label><input id="forgeWhich" readonly value="尚未選取，請點網頁內容">
-<div id="forgeTextGroup" hidden><label>文字內容（僅文字，不會執行 HTML）</label><textarea id="forgeEditText"></textarea></div>
+<div id="forgeTextGroup" hidden><label>文字內容（按 Enter 換行，可保留空白行）</label><textarea id="forgeEditText"></textarea></div>
 <div id="forgeMediaGroup" hidden><label>圖片／影片來源網址（可貼 URL、data URL）</label><input id="forgeMediaUrl" placeholder="https://..."><label>也可選擇本機圖片或影片</label><input type="file" id="forgeMediaFile" accept="image/*,video/mp4,video/webm"></div>
 <div id="forgeLinkGroup" hidden><label>連結網址</label><input id="forgeLinkUrl" placeholder="https://..."></div>
 <div class="forgeButtons"><button id="forgeApply" class="primary">✓ 儲存修改</button><button id="forgeDuplicate">＋ 複製所選區塊</button><button id="forgeDelete" class="danger">✕ 刪除所選內容</button><button id="forgeRestore">↶ 還原刪除區塊</button></div>
@@ -1981,7 +1998,7 @@ panel.innerHTML=`<div class="forgeHead"><h3>鍛模工坊 · 全站編輯 <span i
 <p>重要：這是靜態網站編輯器，修改只儲存在目前瀏覽器。發布前請匯出 HTML 或完整 ZIP，再上傳至 GitHub。外部圖片和 YouTube 連結不會下載成檔案；在公開網站仍須可連線。編輯模式沒有登入驗證，不等同真正的網站後台。</p>`;
 document.body.append(panel);
 updateVersionUI();
-q('#forgeSaveVersion').onclick=()=>{const value=q('#forgeVersionInput').value.trim();if(!/^V?[0-9]+(?:\.[0-9]+){0,3}(?:[-_][a-zA-Z0-9]+)?$/.test(value))return toast('版本格式請使用 V12 或 V12.5');state.releaseVersion=value.startsWith('V')?value:'V'+value;state.releaseNotes=q('#forgeVersionNotes').value.trim();putSaved();toast('✓ 版本已更新為 '+state.releaseVersion+'，匯出時會套用此編號')};
+q('#forgeSaveVersion').onclick=()=>{const value=q('#forgeVersionInput').value.trim();if(!/^V?[0-9]+(?:\.[0-9]+){0,3}(?:[-_][a-zA-Z0-9]+)?$/.test(value))return toast('版本格式請使用 V12 或 V12.7');state.releaseVersion=value.startsWith('V')?value:'V'+value;state.releaseNotes=q('#forgeVersionNotes').value.trim();putSaved();toast('✓ 版本已更新為 '+state.releaseVersion+'，匯出時會套用此編號')};
 function editing(x){admin=x;panel.hidden=!x;btn.textContent=x?'✓ 結束編輯':'✎ 編輯網站';document.body.classList.toggle('forge-editing',x);if(!x && selected){selected.classList.remove('forge-selected');selected=null}}
 applyLogo();
 q('#forgeLogoFile').onchange=async e=>{
@@ -2014,7 +2031,7 @@ function identify(el){if(el.tagName==='IMG')return '圖片';if(['VIDEO','SOURCE'
 function choose(el){if(selected)selected.classList.remove('forge-selected');selected=el;el.classList.add('forge-selected');q('#forgeWhich').value=identify(el);
 const media=['IMG','VIDEO','SOURCE','IFRAME'].includes(el.tagName);
 q('#forgeTextGroup').hidden=media||el.tagName==='SECTION';q('#forgeMediaGroup').hidden=!media;q('#forgeLinkGroup').hidden=el.tagName!=='A';
-q('#forgeEditText').value=el.textContent.trim();q('#forgeMediaUrl').value=el.getAttribute('src')||'';q('#forgeLinkUrl').value=el.getAttribute('href')||'';
+q('#forgeEditText').value=forgeReadText(el);q('#forgeMediaUrl').value=el.getAttribute('src')||'';q('#forgeLinkUrl').value=el.getAttribute('href')||'';
 }
 document.addEventListener('click',e=>{if(!admin||e.target.closest('#forgeAdminPanel,#forgeAdminToggle,#compareAdmin'))return;
 const el=e.target.closest('[data-forge-node]');if(!el)return;e.preventDefault();e.stopPropagation();choose(el);
@@ -2022,7 +2039,7 @@ const el=e.target.closest('[data-forge-node]');if(!el)return;e.preventDefault();
 function savedChange(el,patch){const id=el.dataset.forgeNode;state.changes[id]=Object.assign(state.changes[id]||{},patch);putSaved()}
 q('#forgeApply').onclick=()=>{if(!selected)return toast('請先選取內容');const el=selected;let patch={};if(!q('#forgeTextGroup').hidden)patch.text=q('#forgeEditText').value;
 if(!q('#forgeMediaGroup').hidden)patch.src=q('#forgeMediaUrl').value.trim();if(!q('#forgeLinkGroup').hidden)patch.href=q('#forgeLinkUrl').value.trim();
-if('text' in patch)el.textContent=patch.text;if('src' in patch)el.setAttribute('src',patch.src);if('href' in patch)el.setAttribute('href',patch.href);savedChange(el,patch)};
+if('text' in patch)forgeWriteText(el,patch.text);if('src' in patch)el.setAttribute('src',patch.src);if('href' in patch)el.setAttribute('href',patch.href);savedChange(el,patch)};
 q('#forgeMediaFile').onchange=async e=>{const f=e.target.files[0];if(!f||!selected)return; if(f.size>20*1024*1024)return toast('檔案超過 20MB，請改用公開影片網址');const data=await fileAsData(f);q('#forgeMediaUrl').value=data;toast('檔案已載入，點選「儲存修改」套用')};
 function fileAsData(f){return new Promise((resolve,reject)=>{const r=new FileReader;r.onload=()=>resolve(r.result);r.onerror=()=>reject(Error('讀取失敗'));r.readAsDataURL(f)})}
 q('#forgeDelete').onclick=()=>{if(!selected)return toast('請先選取內容');const el=selected;if(el.matches('body,html'))return;
@@ -2050,7 +2067,7 @@ function forgeZip(entries){
   if(size>0xffffffff||offset>0xffffffff)throw Error('單個檔案或壓縮檔超過 ZIP 格式限制');
   const lh=new Uint8Array([...u32(0x04034b50),...u16(20),...u16(0x800),...u16(0),...u16(0),...u16(0),...u32(crc),...u32(size),...u32(size),...u16(n.length),...u16(0),...n]);
   local.push(lh,data);
-  const ch=new Uint8Array([...u32(0x02014b50),...u16(20),...u16(20),...u16(0x800),...u16(0),...u16(0),...u16(0),...u32(crc),...u32(size),...u32(size),...u16(n.length),...u16(0),...u16(0),...u16(0),...u32(0),...u32(offset),...n]);
+  const ch=new Uint8Array([...u32(0x02014b50),...u16(20),...u16(20),...u16(0x800),...u16(0),...u16(0),...u16(0),...u32(crc),...u32(size),...u32(size),...u16(n.length),...u16(0),...u16(0),...u16(0),...u16(0),...u32(0),...u32(offset),...n]);
   central.push(ch);offset+=lh.length+size;
  }
  const centralBytes=central.reduce((n,x)=>n+x.length,0);
