@@ -87,7 +87,7 @@ html:not(.forge-allow-admin) .compare-admin{display:none!important}
 #faq .faq details, #trade-policies .forge-policy-list details{min-width:0;width:100%;box-sizing:border-box}
 @media(max-width:700px){#faq .faq,#trade-policies .forge-policy-list{grid-template-columns:minmax(0,1fr)}}
 </style><style id="forge-copy-polish-v125">
-/* V12.11: natural CJK sentence breaks on desktop and mobile without changing functionality. */
+/* V12.12: natural CJK sentence breaks on desktop and mobile without changing functionality. */
 html{line-break:strict}
 body{overflow-wrap:break-word}
 :where(p,li,summary,figcaption,blockquote,.desc,.note,.sub,.intro,.q-info,.steps span){
@@ -164,6 +164,15 @@ body[data-forge-page-text-align="center"] .craft-symbol{margin-inline:auto}
 #services .spec .name{grid-row:1;grid-column:2}#services .spec .price{grid-row:1;grid-column:3}#services .spec .desc{grid-row:2}
 @media(max-width:480px){#services .spec li{grid-template-rows:auto auto auto}#services .spec .price{grid-row:2;grid-column:2/4}#services .spec .desc{grid-row:3}#services .spec .gem{grid-row:1/4}}
 #services .sheet-foot{justify-content:center}
+</style>
+<style id="forge-promise-alignment-v1212">
+/* Each visible row shares the same title and description tracks. */
+#view-home .promise>.wrap{row-gap:0}
+.promise .pr{grid-row:span 2;grid-template-rows:subgrid;row-gap:4px;align-items:start}
+.promise .pr>.ico{grid-column:1;grid-row:1/3;align-self:center}
+.promise .pr>b{grid-column:2;grid-row:1;align-self:start}
+.promise .pr>span:not(.ico){grid-column:2;grid-row:2;align-self:start}
+@media(max-width:860px){.promise .pr{padding-block:10px}}
 </style>
 </head><body class="forge-local-admin" data-forge-page-text-align="center">
 <title>鍛模工坊｜3D 展示與作品管理</title>
@@ -2101,13 +2110,13 @@ if (!window.FORGE_IS_LOCAL_ADMIN) { console.info("公開站點：僅供瀏覽。
 
 (function(){"use strict";
 const STORE='forge-studio-v4-editor-state';
-const FORGE_BUILD_VERSION='V12.11';
+const FORGE_BUILD_VERSION='V12.12';
 const FORGE_BUILD_DATE='2026-10-28';
 const q=(s,r=document)=>r.querySelector(s);
 const all=(s,r=document)=>Array.from(r.querySelectorAll(s));
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const DEFAULT_LOGO_SRC=window.FORGE_DEFAULT_LOGO||document.querySelector('#brandMark img')?.getAttribute('src')||'';
-let state={changes:{},deleted:[],added:[],lineId:null,lineUrl:null,email:null,phone:null,logoSrc:null,releaseVersion:'V12.11',releaseNotes:'修正 LOGO 上傳／匯出；訪客頁移除管理介面與版本模式標示'},selected=null,admin=false;
+let state={changes:{},deleted:[],added:[],lineId:null,lineUrl:null,email:null,phone:null,logoSrc:null,releaseVersion:'V12.12',releaseNotes:'修正 LOGO 上傳／匯出；訪客頁移除管理介面與版本模式標示'},selected=null,admin=false;
 let seq=0;
 // ID tags are assigned deterministically to original content. Extra sections get distinct stable IDs.
 const candidates='h1,h2,h3,h4,p,li,small,span,strong,em,b,label,summary,blockquote,figcaption,a,button,img,video,source,iframe,.deliver-card,.craft-card,.work,.svc,.faq,.promise-item,section,header,footer';
@@ -2129,7 +2138,7 @@ const embedded=window.FORGE_PUBLISHED_EDITOR_STATE;
 let savedState=null;try{savedState=JSON.parse(localStorage.getItem(STORE)||'null')}catch(e){console.warn('Editor data unavailable',e)}
 state=Object.assign(state,embedded||{},savedState||{});
 state.changes={};for(const id of new Set([...Object.keys(embedded?.changes||{}),...Object.keys(savedState?.changes||{})]))state.changes[id]=Object.assign({},embedded?.changes?.[id]||{},savedState?.changes?.[id]||{});
-if(!state.releaseVersion||/^V12(?:\.(?:[0-9]|10))?$/.test(state.releaseVersion))state.releaseVersion=FORGE_BUILD_VERSION;
+if(!state.releaseVersion||/^V12(?:\.(?:[0-9]|10|11))?$/.test(state.releaseVersion))state.releaseVersion=FORGE_BUILD_VERSION;
 if(typeof state.releaseNotes!=='string')state.releaseNotes='';
 // One-time centering migration requested by the user. Subsequent manual changes still persist.
 if(state.centeringRevision!=='V12.11'){state.pageTextAlign='center';state.centeringRevision='V12.11';}
@@ -2206,12 +2215,12 @@ function updateVersionUI(){
 }
 const btn=document.createElement('button');btn.id='forgeAdminToggle';btn.textContent='✎ 編輯網站';btn.type='button';document.body.append(btn);
 const panel=document.createElement('aside');panel.id='forgeAdminPanel';panel.hidden=true;
-panel.innerHTML=`<div class="forgeHead"><h3>鍛模工坊 · 全站編輯 <span id="forgeVersionCurrent">V12.11</span></h3><button id="forgeClose" type="button">✕</button></div>
+panel.innerHTML=`<div class="forgeHead"><h3>鍛模工坊 · 全站編輯 <span id="forgeVersionCurrent">V12.12</span></h3><button id="forgeClose" type="button">✕</button></div>
 <p>先點選網站上想修改的文字、圖片、影片或區塊。管理介面只在編輯模式顯示；訪客模式不會看到區塊操作鈕。</p>
 <div id="forgeAdminToast" aria-live="polite"></div>
 <div style="padding:12px;border:1px solid #56647a;border-radius:12px;margin:12px 0;background:#18283e">
 <h3 style="margin:0 0 9px">版本管理／發布編號</h3>
-<label>目前網站版本（例如 V12、V12.11）</label><input id="forgeVersionInput" value="V12.11" maxlength="32" placeholder="V12.11">
+<label>目前網站版本（例如 V12、V12.12）</label><input id="forgeVersionInput" value="V12.12" maxlength="32" placeholder="V12.12">
 <label>本次更新紀錄</label><textarea id="forgeVersionNotes" placeholder="記錄這次改了哪些功能"></textarea>
 <button id="forgeSaveVersion" class="primary" type="button" style="width:100%;margin-top:9px">✓ 儲存版本與更新紀錄</button>
 <p style="font-size:12px;color:#b8c9df">匯出 ZIP 將使用這個編號命名；GitHub 訪客頁面也會顯示版本，方便確認是否更新成功。</p>
@@ -2291,7 +2300,7 @@ q('#forgeApplyLayout').onclick=()=>{
 };
 q('#forgeResetLayout').onclick=()=>{if(!selected)return toast('請先點選想調整的內容');forgeApplyLayout(selected,null);savedChange(selected,{layout:null});forgeSyncLayoutControls(selected);toast('✓ 已恢復此處原本的排版，文字與圖片保持原樣')};
 q('#forgeApplyPageAlign').onclick=()=>{state.pageTextAlign=q('#forgePageTextAlign').value;forgeApplyPageAlign();putSaved();toast('✓ 全站標題與說明對齊已儲存')};
-q('#forgeSaveVersion').onclick=()=>{const value=q('#forgeVersionInput').value.trim();if(!/^V?[0-9]+(?:\.[0-9]+){0,3}(?:[-_][a-zA-Z0-9]+)?$/.test(value))return toast('版本格式請使用 V12 或 V12.11');state.releaseVersion=value.startsWith('V')?value:'V'+value;state.releaseNotes=q('#forgeVersionNotes').value.trim();putSaved();toast('✓ 版本已更新為 '+state.releaseVersion+'，匯出時會套用此編號')};
+q('#forgeSaveVersion').onclick=()=>{const value=q('#forgeVersionInput').value.trim();if(!/^V?[0-9]+(?:\.[0-9]+){0,3}(?:[-_][a-zA-Z0-9]+)?$/.test(value))return toast('版本格式請使用 V12 或 V12.12');state.releaseVersion=value.startsWith('V')?value:'V'+value;state.releaseNotes=q('#forgeVersionNotes').value.trim();putSaved();toast('✓ 版本已更新為 '+state.releaseVersion+'，匯出時會套用此編號')};
 function editing(x){admin=x;panel.hidden=!x;btn.textContent=x?'✓ 結束編輯':'✎ 編輯網站';document.body.classList.toggle('forge-editing',x);if(!x && selected){selected.classList.remove('forge-selected');selected=null}}
 applyLogo();
 function forgeValidateLogo(src){return new Promise((resolve,reject)=>{
